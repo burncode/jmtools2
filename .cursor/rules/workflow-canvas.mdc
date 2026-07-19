@@ -1,0 +1,49 @@
+---
+description: 节点工作台 React Flow 画布与运行时最佳实践
+globs: src/features/workflows/**
+alwaysApply: false
+---
+
+# 节点工作台规则
+
+## React Flow 受控节点
+
+- 必须传递 `onNodesChange` / `onEdgesChange`
+- 拖拽期间（`onNodeDragStart` → `onNodeDragStop`）**禁止**用 definition 合并替换 nodes（会触发 #015）
+- 松手后再补一次 merge/patch（运行态、折叠、颜色等）
+
+## 画布 sync 与签名
+
+- 视觉变化（collapse、accentColor、group color、hidden）走 `computeDefinitionVisualSignature`
+- **不要把 position 写进签名**（避免拖拽时无谓 sync）
+- `mergeDefinitionNodes` 保留 `currentNode.position` 与 `currentNode.selected`
+- 选中态在 `onSelectionChange` 里 `setNodes` 更新，sync effect 不依赖 `selectedNodeIds`
+
+## 性能与稳定性
+
+- 视口 zoom 写入 store 需节流（rAF 或 `onMoveEnd`），禁止每 tick `setState`
+- 工作流入口只执行一次 fitView；有 `definition.viewport` 时恢复视口
+- `initWorkflowNodeRegistry` 必须去重（module-level in-flight guard）
+- 工作台子树用 `WorkflowErrorBoundary` 包裹，崩溃可恢复并写 `componentStack` 日志
+- Radix Popover/NodeToolbar：controlled + 仅在 open 时挂载 content
+
+## 状态与 hook 拆分
+
+- 运行、文件操作、快捷键、草稿 autosave 放独立 hook；Workbench 只做组合
+- Tauri 事件 listener effect 依赖收窄到 `workflow.id`，节点/name 用 ref 读取
+
+## 描述符
+
+- 单一来源：`shared/workflow-nodes/nodes.json`；运行时经 Tauri 同步，失败回退 JSON
+
+## 反例
+
+```typescript
+// ❌ sync 依赖 selectedNodeIds，选中/拖拽时整表替换 nodes
+useEffect(() => { setNodes(merge(..., selectedNodeIds)); }, [..., selectedNodeIds]);
+
+// ❌ onMove 每帧写 zoom
+onMove={(_, vp) => store.setCanvasView({ zoom: vp.zoom })}
+```
+
+详见 `docs/workflow-engine-architecture.md`。

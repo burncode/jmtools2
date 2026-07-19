@@ -1,0 +1,103 @@
+.character-motion-preset-library-shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100vh;
+  min-height: 0;
+  background: var(--app-panel-bg);
+  color: var(--app-text);
+}
+
+.character-motion-preset-library-header {
+  align-items: center;
+  border-bottom: 1px solid var(--app-border);
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 18px;
+}
+
+.character-motion-preset-library-header-title h1 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.character-motion-preset-library-header-title p {
+  color: var(--app-text-muted);
+  font-size: 0.82rem;
+  margin: 4px 0 0;
+}
+
+.character-motion-preset-library-body {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 0;
+  min-height: 0;
+}
+
+.character-motion-preset-library-sidebar {
+  border-right: 1px solid var(--app-border);
+  overflow: auto;
+  padding: 12px;
+}
+
+.character-motion-preset-library-nav {
+  display: grid;
+  gap: 8px;
+}
+
+.character-motion-preset-library-nav-group {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.character-motion-preset-library-nav-group strong {
+  font-size: 0.84rem;
+}
+
+.character-motion-preset-library-nav-group span {
+  color: var(--app-text-muted);
+  font-size: 0.74rem;
+}
+
+.character-motion-preset-library-main {
+  min-height: 0;
+  overflow: auto;
+  padding: 14px 16px;
+}
+
+.character-motion-preset-library-footer {
+  align-items: flex-end;
+  border-top: 1px solid var(--app-border);
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 12px 18px;
+}
+
+.character-motion-preset-library-custom {
+  display: grid;
+  flex: 1;
+  gap: 10px;
+  max-width: 720px;
+}
+
+.character-motion-preset-library-custom-fields {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.character-motion-preset-library-error {
+  color: var(--app-danger);
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.character-motion-preset-library-main .character-motion-preset-picker {
+  margin-bottom: 0;
+}
+
+.character-motion-preset-library-main .character-motion-preset-grid {
+  max-height: none;
+}

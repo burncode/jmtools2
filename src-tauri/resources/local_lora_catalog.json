@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "loras": [
+    {
+      "id": "pixel-art-sprite-klein",
+      "label": "像素精灵 · Klein 4B",
+      "hfRepo": "Limbicnation/pixel-art-lora",
+      "fileStem": "pytorch_lora_weights",
+      "compatiblePresets": ["Flux2Klein4B"],
+      "compatibleProfileIds": ["klein-4b-q4", "klein-4b-q8"],
+      "defaultStrength": 0.9,
+      "triggerWords": ["pixel art sprite"],
+      "estimatedSizeMb": 120,
+      "description": "专为 FLUX.2 Klein 4B 训练的像素风 LoRA。"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "anime_cel",
+  "label": "赛璐璐动漫",
+  "params": {
+    "styleType": "anime",
+    "colorTheme": "light",
+    "renderType": "anime",
+    "pixelDensity": "none",
+    "edgeStyle": "hard",
+    "detail": 0.75,
+    "contrast": 0.65,
+    "saturation": 0.8,
+    "sharpness": 0.55,
+    "paletteMode": "preset",
+    "maxColors": 24,
+    "paletteStrength": 0.7,
+    "dithering": false,
+    "paletteColors": "[\"#ffffff\",\"#f8e9a1\",\"#f4a261\",\"#e76f51\",\"#264653\",\"#2a9d8f\",\"#e9c46a\",\"#457b9d\"]",
+    "lightingType": "soft",
+    "shadowStrength": 0.45,
+    "highlightStrength": 0.55,
+    "ambient": 0.5,
+    "paletteLock": false,
+    "lineStyleLock": true,
+    "identityLock": true,
+    "consistencyStrength": 0.8
+  }
+}

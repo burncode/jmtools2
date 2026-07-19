@@ -1,0 +1,51 @@
+---
+description: Rust Tauri command 层行数与职责边界，防止 commands 单体膨胀
+globs: src-tauri/**
+alwaysApply: false
+---
+
+# Rust Commands 边界
+
+## 行数上限
+
+- `src-tauri/src/commands/**/*.rs` 单文件 **硬上限 600 行**；新增代码不得使文件超过 **500 行**。
+- `src-tauri/src/character/**/*.rs` 单文件 **硬上限 600 行**（域逻辑同样遵守，避免拆分后反弹）。
+- 域逻辑放在 `src-tauri/src/character/`、`image_pipeline/`、`engine/`，不在 command 文件堆实现。
+
+## command 层只做
+
+- 参数校验（路径、ID、manifest）
+- 日志与 progress emit 入口
+- 调用 domain 服务
+- 将错误映射为可展示的中文字符串
+
+## 禁止在 command 文件新增
+
+- HTTP client / AI provider 请求体
+- Prompt 拼接与 anchor 注入
+- 复杂图像算法（应进 `image_pipeline/`）
+- 角色 JSON schema / store 读写（应进 `character/store.rs`）
+
+## 角色域模块
+
+| 路径 | 职责 |
+|------|------|
+| `character/model.rs` | serde 类型 |
+| `character/store.rs` | character.json、index、SQLite |
+| `character/preview.rs` | 路径填充、hydrate |
+| `character/prompt.rs` | build_*_prompt |
+| `character/generation/` | AI 设置、母版/视图生成 |
+| `character/actions/` | 动作帧、filmstrip |
+| `character/workflow/` | workflow_* 门面（供 engine / character_pipeline） |
+
+## workflow 扩展
+
+1. `shared/workflow-nodes/nodes.json`
+2. `engine/executor/character_nodes.rs`
+3. **`character/workflow/`** — 不再往 `commands/characters.rs` 堆逻辑
+
+## 例外
+
+- 仅 Tauri Input/Output struct（<30 行）可留在 command 文件。
+
+详见 `docs/character-pipeline-roadmap.md`。

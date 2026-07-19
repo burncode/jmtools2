@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "id": "locomotion",
+      "label": "移动",
+      "presets": [
+        { "id": "idle", "label": "待机", "actionId": "idle", "defaultFrames": 4, "prompt": "subtle breathing idle loop, minimal movement" },
+        { "id": "walk", "label": "行走", "actionId": "walk", "defaultFrames": 6, "prompt": "natural walk cycle, alternating legs, slight body bob" },
+        { "id": "run", "label": "奔跑", "actionId": "run", "defaultFrames": 6, "prompt": "fast run cycle, strong leg extension, forward lean" },
+        { "id": "dash", "label": "冲刺", "actionId": "dash", "defaultFrames": 5, "prompt": "quick dash burst, motion blur feel, strong forward motion" },
+        { "id": "jump", "label": "跳跃", "actionId": "jump", "defaultFrames": 6, "prompt": "jump takeoff, apex hang, landing squash" },
+        { "id": "crouch", "label": "蹲伏", "actionId": "crouch", "defaultFrames": 4, "prompt": "crouch idle, lowered stance, ready to move" }
+      ]
+    },
+    {
+      "id": "combat",
+      "label": "战斗",
+      "presets": [
+        { "id": "attack", "label": "攻击", "actionId": "attack", "defaultFrames": 6, "prompt": "melee attack swing, wind-up, strike, recovery" },
+        { "id": "heavy_attack", "label": "重击", "actionId": "heavy_attack", "defaultFrames": 8, "prompt": "heavy charged attack, slow wind-up, powerful strike" },
+        { "id": "block", "label": "格挡", "actionId": "block", "defaultFrames": 4, "prompt": "defensive block pose, shield or weapon raised" },
+        { "id": "hurt", "label": "受击", "actionId": "hurt", "defaultFrames": 4, "prompt": "hit reaction, knockback, pain expression" },
+        { "id": "death", "label": "死亡", "actionId": "death", "defaultFrames": 6, "prompt": "fall down death animation, collapse to ground" },
+        { "id": "shoot", "label": "射击", "actionId": "shoot", "defaultFrames": 5, "prompt": "ranged shoot, aim, fire, recoil recovery" }
+      ]
+    },
+    {
+      "id": "emote",
+      "label": "表情",
+      "presets": [
+        { "id": "wave", "label": "挥手", "actionId": "wave", "defaultFrames": 5, "prompt": "friendly wave greeting, arm raised" },
+        { "id": "cheer", "label": "欢呼", "actionId": "cheer", "defaultFrames": 6, "prompt": "celebration cheer, arms up, joyful bounce" },
+        { "id": "dance", "label": "跳舞", "actionId": "dance", "defaultFrames": 8, "prompt": "rhythmic dance loop, expressive body motion" },
+        { "id": "victory", "label": "胜利", "actionId": "victory", "defaultFrames": 6, "prompt": "victory pose, triumphant stance" },
+        { "id": "sleep", "label": "睡眠", "actionId": "sleep", "defaultFrames": 4, "prompt": "sleeping idle, gentle breathing, eyes closed" }
+      ]
+    },
+    {
+      "id": "magic",
+      "label": "魔法",
+      "presets": [
+        { "id": "cast", "label": "施法", "actionId": "cast", "defaultFrames": 6, "prompt": "spell casting, hand gesture, energy gather" },
+        { "id": "power_up", "label": "蓄力", "actionId": "power_up", "defaultFrames": 6, "prompt": "power up charge, glowing aura buildup" },
+        { "id": "summon", "label": "召唤", "actionId": "summon", "defaultFrames": 8, "prompt": "summoning ritual, dramatic pose sequence" }
+      ]
+    },
+    {
+      "id": "utility",
+      "label": "通用",
+      "presets": [
+        { "id": "pickup", "label": "拾取", "actionId": "pickup", "defaultFrames": 4, "prompt": "pick up item from ground, bend and grab" },
+        { "id": "interact", "label": "交互", "actionId": "interact", "defaultFrames": 4, "prompt": "interact with object, reach forward" },
+        { "id": "climb", "label": "攀爬", "actionId": "climb", "defaultFrames": 6, "prompt": "climbing motion, alternating arm pull" }
+      ]
+    }
+  ]
+}

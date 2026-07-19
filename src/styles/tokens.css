@@ -1,0 +1,329 @@
+/*
+ * Token usage:
+ * - --app-* : layout, panels, chrome, workbench surfaces, status colors
+ * - shadcn (--primary, --background, …) : Button, Input, Tabs and other ui/ primitives
+ * Visual v2: Zinc Pro palette — see docs/design-system-visual-v2.md
+ */
+
+:root,
+.light {
+  color-scheme: light;
+
+  --app-bg: #fafafa;
+  --app-bg-soft: #f4f4f5;
+  --app-sidebar: rgba(255, 255, 255, 0.88);
+  --app-surface: #ffffff;
+  --app-surface-muted: #f4f4f5;
+  --app-surface-raised: #ffffff;
+  --app-surface-hover: #e4e4e7;
+  --app-control: #f4f4f5;
+  --app-control-hover: #e4e4e7;
+  --app-control-active: #eef2ff;
+  --app-border: rgba(228, 228, 231, 0.85);
+  --app-border-strong: #d4d4d8;
+  --app-text: #18181b;
+  --app-text-muted: #71717a;
+  --app-text-subtle: #a1a1aa;
+  --app-primary: #6366f1;
+  --app-primary-hover: #4f46e5;
+  --app-primary-soft: rgba(99, 102, 241, 0.12);
+  --app-accent: #7c3aed;
+  --app-success: #059669;
+  --app-warning: #d97706;
+  --app-danger: #dc2626;
+  --app-status-success-border: color-mix(in srgb, var(--app-success) 35%, var(--app-panel-border));
+  --app-status-warning-border: color-mix(in srgb, var(--app-warning) 40%, var(--app-panel-border));
+  --app-status-danger-border: color-mix(in srgb, var(--app-danger) 40%, var(--app-panel-border));
+  --app-status-running-border: color-mix(in srgb, var(--app-accent) 45%, var(--app-panel-border));
+  --app-status-success-ring: color-mix(in srgb, var(--app-success) 45%, transparent);
+  --app-status-warning-ring: color-mix(in srgb, var(--app-warning) 45%, transparent);
+  --app-status-danger-ring: color-mix(in srgb, var(--app-danger) 45%, transparent);
+  --app-focus: rgba(99, 102, 241, 0.28);
+  --app-scrollbar-thumb: #d4d4d8;
+
+  --app-glass-bg: rgba(255, 255, 255, 0.72);
+  --app-glass-border: rgba(228, 228, 231, 0.9);
+  --app-shadow-pro: 0 25px 50px -12px rgba(24, 24, 27, 0.12);
+  --app-gradient-primary-from: #6366f1;
+  --app-gradient-primary-to: #7c3aed;
+  --app-gradient-primary-shadow: rgba(99, 102, 241, 0.22);
+  --app-grid-line: rgba(161, 161, 170, 0.22);
+  --app-glow-primary: rgba(99, 102, 241, 0.14);
+  --app-canvas-bg: #f4f4f5;
+
+  --app-space-1: 4px;
+  --app-space-2: 8px;
+  --app-space-3: 12px;
+  --app-space-4: 16px;
+  --app-space-5: 20px;
+  --app-space-6: 24px;
+  --app-space-8: 32px;
+  --app-radius-sm: 6px;
+  --app-radius: 8px;
+  --app-radius-md: 10px;
+  --app-radius-lg: 12px;
+  --app-control-height-sm: 28px;
+  --app-control-height: 34px;
+  --app-control-height-lg: 42px;
+  --app-toolbar-height: 36px;
+  --app-panel-padding: 18px;
+  --app-panel-gap: 14px;
+  --app-page-max-settings: 1180px;
+  --app-page-max-library: 1440px;
+  --app-page-max-workbench: 1680px;
+  --app-page-padding-x: 24px;
+  --app-page-padding-y: 22px;
+  --app-inspector-width: 320px;
+  --app-inspector-width-sm: 280px;
+  --app-aside-width: 320px;
+  --app-preview-max-height: 480px;
+  --app-preview-max-height-sm: 420px;
+  --app-content-gap: 16px;
+  --app-workspace-gap: 14px;
+  --app-font-size-2xs: 11px;
+  --app-font-size-xs: 12px;
+  --app-font-size-sm: 13px;
+  --app-font-size: 14px;
+  --app-font-size-lg: 16px;
+  --app-font-size-xl: 18px;
+  --app-font-weight-normal: 400;
+  --app-font-weight-medium: 500;
+  --app-font-weight-semibold: 600;
+  --app-font-weight-bold: 700;
+  --app-letter-spacing-ui: 0.012em;
+  --app-letter-spacing-label: 0.02em;
+  --app-letter-spacing-caps: 0.04em;
+  --app-font-variation-body: normal;
+  --app-font-variation-label: normal;
+  --app-line-height-tight: 1.25;
+  --app-line-height: 1.5;
+  --app-line-height-loose: 1.65;
+  --app-panel-bg: color-mix(in srgb, var(--app-surface) 92%, transparent);
+  --app-panel-bg-muted: var(--app-surface-muted);
+  --app-panel-border: var(--app-border);
+  --app-control-bg: var(--app-control);
+  --app-control-bg-hover: var(--app-control-hover);
+  --app-control-bg-active: var(--app-control-active);
+  --app-control-border: var(--app-border);
+  --app-control-border-active: var(--app-primary);
+  --app-selected-bg: var(--app-control-active);
+  --app-selected-border: var(--app-primary);
+  --app-selected-ring: var(--app-focus);
+  --app-shadow-sm: 0 1px 2px rgba(24, 24, 27, 0.06);
+  --app-shadow-md: 0 8px 24px rgba(24, 24, 27, 0.08);
+  --app-shadow-lg: 0 18px 42px rgba(24, 24, 27, 0.1);
+  --app-shadow: var(--app-shadow-pro);
+  --app-shadow-popover: 0 18px 42px rgba(24, 24, 27, 0.14);
+  --app-duration-fast: 120ms;
+  --app-duration: 180ms;
+  --app-duration-slow: 260ms;
+  --app-ease: cubic-bezier(0.2, 0, 0, 1);
+
+  --background: oklch(0.985 0.004 286);
+  --foreground: oklch(0.21 0.006 286);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.585 0.2 277);
+  --primary-foreground: oklch(0.99 0.01 277);
+  --secondary: oklch(0.96 0.004 286);
+  --secondary-foreground: oklch(0.25 0.006 286);
+  --muted: oklch(0.96 0.004 286);
+  --muted-foreground: oklch(0.52 0.01 286);
+  --accent: oklch(0.96 0.01 277);
+  --accent-foreground: oklch(0.28 0.02 277);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.88 0.004 286);
+  --input: oklch(0.88 0.004 286);
+  --ring: oklch(0.585 0.2 277);
+  --radius: 0.5rem;
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --app-bg: #09090b;
+  --app-bg-soft: #0c0c0e;
+  --app-sidebar: #09090b;
+  --app-surface: #18181b;
+  --app-surface-muted: #111113;
+  --app-surface-raised: #1f1f23;
+  --app-surface-hover: #27272a;
+  --app-control: #18181b;
+  --app-control-hover: #27272a;
+  --app-control-active: rgba(99, 102, 241, 0.16);
+  --app-border: rgba(39, 39, 42, 0.65);
+  --app-border-strong: #3f3f46;
+  --app-text: #fafafa;
+  --app-text-muted: #d4d4d8;
+  --app-text-subtle: #a1a1aa;
+  --app-primary: #818cf8;
+  --app-primary-hover: #a5b4fc;
+  --app-primary-soft: rgba(129, 140, 248, 0.16);
+  --app-accent: #a78bfa;
+  --app-success: #34d399;
+  --app-warning: #fbbf24;
+  --app-danger: #f87171;
+  --app-status-success-border: color-mix(in srgb, var(--app-success) 35%, var(--app-panel-border));
+  --app-status-warning-border: color-mix(in srgb, var(--app-warning) 40%, var(--app-panel-border));
+  --app-status-danger-border: color-mix(in srgb, var(--app-danger) 40%, var(--app-panel-border));
+  --app-status-running-border: color-mix(in srgb, var(--app-accent) 45%, var(--app-panel-border));
+  --app-status-success-ring: color-mix(in srgb, var(--app-success) 45%, transparent);
+  --app-status-warning-ring: color-mix(in srgb, var(--app-warning) 45%, transparent);
+  --app-status-danger-ring: color-mix(in srgb, var(--app-danger) 45%, transparent);
+  --app-focus: rgba(129, 140, 248, 0.32);
+  --app-scrollbar-thumb: #3f3f46;
+
+  --app-glass-bg: rgba(24, 24, 27, 0.82);
+  --app-glass-border: rgba(39, 39, 42, 0.75);
+  --app-shadow-pro: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+  --app-gradient-primary-from: #6366f1;
+  --app-gradient-primary-to: #7c3aed;
+  --app-gradient-primary-shadow: rgba(99, 102, 241, 0.28);
+  --app-grid-line: rgba(63, 63, 70, 0.45);
+  --app-glow-primary: rgba(99, 102, 241, 0.18);
+  --app-canvas-bg: #0c0c0e;
+
+  --app-space-1: 4px;
+  --app-space-2: 8px;
+  --app-space-3: 12px;
+  --app-space-4: 16px;
+  --app-space-5: 20px;
+  --app-space-6: 24px;
+  --app-space-8: 32px;
+  --app-radius-sm: 6px;
+  --app-radius: 8px;
+  --app-radius-md: 10px;
+  --app-radius-lg: 12px;
+  --app-control-height-sm: 28px;
+  --app-control-height: 34px;
+  --app-control-height-lg: 42px;
+  --app-toolbar-height: 36px;
+  --app-panel-padding: 18px;
+  --app-panel-gap: 14px;
+  --app-page-max-settings: 1180px;
+  --app-page-max-library: 1440px;
+  --app-page-max-workbench: 1680px;
+  --app-page-padding-x: 24px;
+  --app-page-padding-y: 22px;
+  --app-inspector-width: 320px;
+  --app-inspector-width-sm: 280px;
+  --app-aside-width: 320px;
+  --app-preview-max-height: 480px;
+  --app-preview-max-height-sm: 420px;
+  --app-content-gap: 16px;
+  --app-workspace-gap: 14px;
+  --app-font-size-2xs: 11px;
+  --app-font-size-xs: 12px;
+  --app-font-size-sm: 13px;
+  --app-font-size: 14px;
+  --app-font-size-lg: 16px;
+  --app-font-size-xl: 18px;
+  --app-font-weight-normal: 450;
+  --app-font-weight-medium: 500;
+  --app-font-weight-semibold: 600;
+  --app-font-weight-bold: 700;
+  --app-letter-spacing-ui: 0.012em;
+  --app-letter-spacing-label: 0.02em;
+  --app-letter-spacing-caps: 0.04em;
+  --app-font-variation-body: "wght" 475;
+  --app-font-variation-label: "wght" 550;
+  --app-line-height-tight: 1.25;
+  --app-line-height: 1.55;
+  --app-line-height-loose: 1.65;
+  --app-panel-bg: color-mix(in srgb, var(--app-surface) 88%, transparent);
+  --app-panel-bg-muted: var(--app-surface-muted);
+  --app-panel-border: var(--app-border);
+  --app-control-bg: var(--app-control);
+  --app-control-bg-hover: var(--app-control-hover);
+  --app-control-bg-active: var(--app-control-active);
+  --app-control-border: var(--app-border);
+  --app-control-border-active: var(--app-primary);
+  --app-selected-bg: var(--app-control-active);
+  --app-selected-border: var(--app-primary);
+  --app-selected-ring: var(--app-focus);
+  --app-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.28);
+  --app-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.32);
+  --app-shadow-lg: 0 18px 42px rgba(0, 0, 0, 0.38);
+  --app-shadow: var(--app-shadow-pro);
+  --app-shadow-popover: 0 18px 42px rgba(0, 0, 0, 0.48);
+  --app-duration-fast: 120ms;
+  --app-duration: 180ms;
+  --app-duration-slow: 260ms;
+  --app-ease: cubic-bezier(0.2, 0, 0, 1);
+
+  --background: oklch(0.14 0.005 286);
+  --foreground: oklch(0.98 0.004 286);
+  --card: oklch(0.19 0.006 286);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.17 0.006 286);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.68 0.17 277);
+  --primary-foreground: oklch(0.99 0.01 277);
+  --secondary: oklch(0.24 0.008 286);
+  --secondary-foreground: oklch(0.92 0.004 286);
+  --muted: oklch(0.22 0.008 286);
+  --muted-foreground: oklch(0.78 0.01 286);
+  --accent: oklch(0.24 0.02 277);
+  --accent-foreground: oklch(0.94 0.01 277);
+  --destructive: oklch(0.65 0.2 25);
+  --border: oklch(0.32 0.008 286);
+  --input: oklch(0.3 0.008 286);
+  --ring: oklch(0.68 0.17 277);
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+[data-density="compact"] {
+  --app-control-height-sm: 26px;
+  --app-control-height: 32px;
+  --app-control-height-lg: 38px;
+  --app-toolbar-height: 34px;
+  --app-panel-padding: 14px;
+  --app-panel-gap: 10px;
+  --app-page-padding-x: 20px;
+  --app-page-padding-y: 18px;
+  --app-content-gap: 14px;
+  --app-workspace-gap: 10px;
+  --app-font-size: 13px;
+}
+
+[data-density="spacious"] {
+  --app-control-height-sm: 30px;
+  --app-control-height: 38px;
+  --app-control-height-lg: 46px;
+  --app-toolbar-height: 40px;
+  --app-panel-padding: 22px;
+  --app-panel-gap: 18px;
+  --app-page-padding-x: 28px;
+  --app-page-padding-y: 26px;
+  --app-content-gap: 20px;
+  --app-workspace-gap: 16px;
+  --app-font-size: 15px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

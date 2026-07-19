@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "id": "klein-4b-q8",
+      "label": "FLUX.2 Klein 4B · Q8 高质量",
+      "backend": "sd-cpp",
+      "preset": "Flux2Klein4B",
+      "weight": "Q8_0",
+      "minVramMb": 10240,
+      "defaultWidth": 512,
+      "defaultHeight": 512,
+      "defaultSteps": 4,
+      "defaultCfgScale": 1.0,
+      "estimatedSizeMb": 5200,
+      "description": "适合 10GB 以上显存，质量最佳。含 DiT、VAE 与 Qwen3-4B 文本编码器，共 3 个文件。"
+    },
+    {
+      "id": "klein-4b-q4",
+      "label": "FLUX.2 Klein 4B · Q4 推荐",
+      "backend": "sd-cpp",
+      "preset": "Flux2Klein4B",
+      "weight": "Q4_0",
+      "minVramMb": 6144,
+      "defaultWidth": 512,
+      "defaultHeight": 512,
+      "defaultSteps": 4,
+      "defaultCfgScale": 1.0,
+      "estimatedSizeMb": 3500,
+      "description": "多数 6–10GB 显卡默认档位。含 DiT、VAE 与 Qwen3-4B 文本编码器，共 3 个文件。"
+    },
+    {
+      "id": "sdxs-512",
+      "label": "SDXS 512 · 快速草稿",
+      "backend": "sd-cpp",
+      "preset": "SDXS512DreamShaper",
+      "weight": "default",
+      "minVramMb": 4096,
+      "defaultWidth": 512,
+      "defaultHeight": 512,
+      "defaultSteps": 4,
+      "defaultCfgScale": 1.0,
+      "estimatedSizeMb": 800,
+      "description": "4–6GB 显存快速预览，像素细节弱于 Klein。"
+    },
+    {
+      "id": "ollama-flux2-klein",
+      "label": "Ollama · flux2-klein（外部服务）",
+      "backend": "ollama",
+      "preset": "flux2-klein",
+      "weight": "default",
+      "minVramMb": 0,
+      "defaultWidth": 512,
+      "defaultHeight": 512,
+      "defaultSteps": 4,
+      "defaultCfgScale": 1.0,
+      "estimatedSizeMb": 0,
+      "description": "通过本机 Ollama 图像 API 生成，需 ollama pull 对应模型。"
+    },
+    {
+      "id": "pixel-forge-anvil",
+      "label": "Pixel-Forge · 32×32 图标",
+      "backend": "pixel-forge",
+      "preset": "anvil",
+      "weight": "default",
+      "minVramMb": 0,
+      "defaultWidth": 32,
+      "defaultHeight": 32,
+      "defaultSteps": 20,
+      "defaultCfgScale": 7.0,
+      "estimatedSizeMb": 50,
+      "description": "极低配 CPU 小图标/道具，不支持 turnaround。"
+    },
+    {
+      "id": "bonsai-ternary-4b",
+      "label": "Bonsai Image 4B · Ternary（Phase 2）",
+      "backend": "oxibonsai",
+      "preset": "bonsai-ternary-4b",
+      "weight": "TQ2_0_g128",
+      "minVramMb": 4096,
+      "defaultWidth": 512,
+      "defaultHeight": 512,
+      "defaultSteps": 4,
+      "defaultCfgScale": 1.0,
+      "estimatedSizeMb": 4500,
+      "description": "PrismML Bonsai 三值量化（Phase 2 评估，POC 暂未集成；见 docs/local-bonsai-poc-notes.md）。"
+    }
+  ]
+}

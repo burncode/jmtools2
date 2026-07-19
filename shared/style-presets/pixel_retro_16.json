@@ -1,0 +1,28 @@
+{
+  "id": "pixel_retro_16",
+  "label": "像素复古 16 色",
+  "params": {
+    "styleType": "pixel",
+    "colorTheme": "fantasy",
+    "renderType": "pixel",
+    "pixelDensity": "32x32",
+    "edgeStyle": "hard",
+    "detail": 0.6,
+    "contrast": 0.7,
+    "saturation": 0.6,
+    "sharpness": 0.4,
+    "paletteMode": "preset",
+    "maxColors": 16,
+    "paletteStrength": 0.85,
+    "dithering": true,
+    "paletteColors": "[\"#1a1c2c\",\"#5d275d\",\"#b13e53\",\"#ef7d57\",\"#ffcd75\",\"#a7f070\",\"#38b764\",\"#257179\",\"#29366f\",\"#3b5dc9\",\"#41a6f6\",\"#73eff7\",\"#f4f4f4\",\"#94b0b2\",\"#566c86\",\"#333c57\"]",
+    "lightingType": "flat",
+    "shadowStrength": 0.5,
+    "highlightStrength": 0.3,
+    "ambient": 0.4,
+    "paletteLock": true,
+    "lineStyleLock": true,
+    "identityLock": false,
+    "consistencyStrength": 0.85
+  }
+}

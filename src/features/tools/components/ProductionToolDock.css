@@ -1,0 +1,205 @@
+.production-tool-dock {
+  display: grid;
+  gap: 12px;
+  border: 1px solid color-mix(in srgb, var(--app-border) 82%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--app-surface) 70%, transparent);
+  padding: 14px;
+}
+
+.production-tool-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.production-tool-toolbar::-webkit-scrollbar {
+  display: none;
+}
+
+.production-tool-toolbar-button {
+  flex-shrink: 0;
+  height: 34px;
+  border-color: var(--app-control-border);
+  background: var(--app-control-bg);
+  color: var(--app-text);
+  font-size: var(--app-font-size-xs);
+  font-weight: 760;
+  padding-inline: 10px;
+}
+
+.production-tool-toolbar-button svg {
+  width: 14px;
+  height: 14px;
+  color: var(--app-accent);
+}
+
+.production-tool-toolbar-button[data-status="planned"] {
+  color: var(--app-text-muted);
+}
+
+.production-tool-tooltip {
+  display: grid;
+  gap: 3px;
+  max-width: 280px;
+  line-height: 1.45;
+}
+
+.production-tool-tooltip strong,
+.production-tool-tooltip span,
+.production-tool-tooltip p {
+  display: block;
+}
+
+.production-tool-tooltip strong {
+  font-size: 12px;
+}
+
+.production-tool-tooltip span {
+  opacity: 0.74;
+}
+
+.production-tool-tooltip p {
+  margin: 0;
+}
+
+.production-tool-dock > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.production-tool-dock > header > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.production-tool-dock strong,
+.production-tool-dock small {
+  display: block;
+}
+
+.production-tool-dock strong {
+  color: var(--app-text);
+  font-size: var(--app-font-size-sm);
+  line-height: 1.35;
+}
+
+.production-tool-dock small {
+  margin-top: 2px;
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+  line-height: 1.45;
+}
+
+.production-tool-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.production-tool-card {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 82px;
+  border: 1px solid color-mix(in srgb, var(--app-border) 78%, transparent);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, var(--app-accent) 10%, transparent), transparent 36%),
+    color-mix(in srgb, var(--app-surface-muted) 54%, transparent);
+  padding: 10px;
+}
+
+.production-tool-card[data-status="designing"] {
+  border-color: color-mix(in srgb, var(--app-primary) 34%, var(--app-border));
+}
+
+.production-tool-card[data-disabled="true"] {
+  opacity: 0.78;
+}
+
+.production-tool-card[data-disabled="true"] .production-tool-copy p,
+.production-tool-card[data-disabled="true"] .production-tool-copy span {
+  color: color-mix(in srgb, var(--app-text-muted) 88%, var(--app-text));
+}
+
+.production-tool-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid color-mix(in srgb, var(--app-primary) 28%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--app-primary) 12%, transparent);
+  color: var(--app-accent);
+}
+
+.production-tool-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.production-tool-copy {
+  min-width: 0;
+}
+
+.production-tool-copy > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+.production-tool-copy span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+}
+
+.production-tool-copy span svg {
+  width: 10px;
+  height: 10px;
+  color: var(--app-success);
+}
+
+.production-tool-copy p {
+  display: -webkit-box;
+  margin: 5px 0 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+  line-height: 1.45;
+  -webkit-line-clamp: 2;
+}
+
+.production-tool-card [data-slot="button"] {
+  height: 30px;
+  padding-inline: 10px;
+  font-size: var(--app-font-size-xs);
+}
+
+.production-tool-card [data-slot="button"] svg {
+  width: 13px;
+  height: 13px;
+}
+
+@media (max-width: 1180px) {
+  .production-tool-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,164 @@
+.character-pipeline-progress {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.character-pipeline-segment {
+  align-items: center;
+  background: var(--app-panel-bg);
+  border: 1px solid var(--app-panel-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow-sm);
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 72px;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+.character-pipeline-segment[data-status="complete"] {
+  border-color: var(--app-status-success-ring);
+}
+
+.character-pipeline-segment[data-status="warning"] {
+  border-color: var(--app-status-warning-ring);
+}
+
+.character-pipeline-segment[data-status="running"] {
+  border-color: color-mix(in srgb, var(--app-accent) 55%, transparent);
+}
+
+.character-pipeline-segment[data-status="failed"] {
+  border-color: var(--app-status-danger-ring);
+}
+
+.character-pipeline-segment-index {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.character-pipeline-segment strong {
+  font-size: 12px;
+}
+
+.character-pipeline-segment small {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.character-pipeline-progress--full.character-pipeline-progress--stepper {
+  align-items: stretch;
+  border-bottom: 1px solid var(--app-panel-border);
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  gap: 0;
+  overflow-x: auto;
+  padding-bottom: 0;
+  scrollbar-width: thin;
+  width: 100%;
+}
+
+.character-pipeline-progress--stepper .character-pipeline-segment {
+  position: relative;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-width: 88px;
+  min-height: 40px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  padding: 8px 12px;
+  color: var(--app-text-muted);
+}
+
+.character-pipeline-progress--stepper .character-pipeline-segment:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 1px;
+  height: 16px;
+  transform: translateY(-50%);
+  background: var(--app-panel-border);
+}
+
+.character-pipeline-progress--stepper .character-pipeline-segment-body {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+  min-width: 0;
+}
+
+.character-pipeline-progress--stepper .character-pipeline-segment-index {
+  align-items: center;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  color: inherit;
+  display: grid;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: var(--app-font-weight-semibold);
+  height: 22px;
+  place-items: center;
+  width: 22px;
+}
+
+.character-pipeline-progress--stepper .character-pipeline-segment strong {
+  font-size: var(--app-font-size-sm);
+  font-weight: var(--app-font-weight-medium);
+  white-space: nowrap;
+}
+
+.character-pipeline-progress--stepper .character-pipeline-segment[data-status="complete"] {
+  border-bottom-color: var(--app-success);
+  color: var(--app-success);
+}
+
+.character-pipeline-progress--stepper .character-pipeline-segment[data-status="warning"] {
+  border-bottom-color: var(--app-warning);
+  color: var(--app-warning);
+}
+
+.character-pipeline-progress--stepper .character-pipeline-segment[data-status="running"] {
+  border-bottom-color: var(--app-primary);
+  color: var(--app-primary);
+}
+
+.character-pipeline-progress--stepper .character-pipeline-segment[data-status="failed"] {
+  border-bottom-color: var(--app-danger);
+  color: var(--app-danger);
+}
+
+.character-pipeline-progress--stepper .character-pipeline-segment:hover {
+  background: color-mix(in srgb, var(--app-control-bg-hover) 60%, transparent);
+  color: var(--app-text);
+}
+
+.character-pipeline-progress--readonly .character-pipeline-segment {
+  cursor: default;
+  pointer-events: none;
+}
+
+.character-pipeline-progress--readonly .character-pipeline-segment:hover {
+  background: transparent;
+  color: inherit;
+}
+
+.character-pipeline-progress--readonly .character-pipeline-segment[data-status="idle"] {
+  color: var(--app-text-muted);
+}
+
+.character-pipeline-progress--compact.character-pipeline-progress--stepper .character-pipeline-segment {
+  min-height: 32px;
+  padding: 6px 10px;
+}
+
+.character-pipeline-progress--compact.character-pipeline-progress--stepper .character-pipeline-segment strong {
+  font-size: var(--app-font-size-xs);
+}

@@ -1,0 +1,28 @@
+{
+  "id": "realistic_soft",
+  "label": "柔光写实",
+  "params": {
+    "styleType": "realism",
+    "colorTheme": "light",
+    "renderType": "realistic",
+    "pixelDensity": "none",
+    "edgeStyle": "soft",
+    "detail": 0.85,
+    "contrast": 0.55,
+    "saturation": 0.5,
+    "sharpness": 0.65,
+    "paletteMode": "preset",
+    "maxColors": 32,
+    "paletteStrength": 0.5,
+    "dithering": false,
+    "paletteColors": "[\"#2b2d42\",\"#8d99ae\",\"#edf2f4\",\"#ef233c\",\"#d90429\",\"#495057\",\"#adb5bd\",\"#f8f9fa\"]",
+    "lightingType": "cinematic",
+    "shadowStrength": 0.6,
+    "highlightStrength": 0.45,
+    "ambient": 0.35,
+    "paletteLock": false,
+    "lineStyleLock": false,
+    "identityLock": true,
+    "consistencyStrength": 0.75
+  }
+}

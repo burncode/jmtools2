@@ -1,0 +1,29 @@
+---
+description: 与用户沟通必须使用简体中文
+alwaysApply: true
+---
+
+# 中文沟通规则
+
+## 必须遵守
+
+- 与用户对话、任务总结、错误说明、变更说明：**一律使用简体中文**
+- 用户界面文案默认简体中文（按钮、标签、错误、空状态、提示）
+- 不确定时先说明假设，用中文提问；避免中英混杂的长段落
+
+## 可保留英文
+
+- 代码标识符、文件路径、库名、API 名
+- 错误栈、日志关键字、第三方文档引用
+
+## 示例
+
+```
+❌ Fixed the drag issue in WorkflowCanvas.
+✅ 已修复节点拖拽时的 React Flow #015 错误：拖拽期间跳过画布 sync effect。
+```
+
+```
+❌ Please run bun run build to verify.
+✅ 请在本地运行 `bun run build` 验证前端构建。
+```

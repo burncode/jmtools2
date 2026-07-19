@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "skills": {
+    "agent-browser": {
+      "source": "vercel-labs/agent-browser",
+      "sourceType": "github",
+      "skillPath": "skills/agent-browser/SKILL.md",
+      "computedHash": "228f87d57035100d9dc6efcfc05aafd4b6e3962adacaa04b8217ab2fadb15dc8"
+    },
+    "api-design-principles": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/backend-development/skills/api-design-principles/SKILL.md",
+      "computedHash": "a91429c25bb978f99f5da8d8752b8ae87ece51abcb24acb3953a5b1662c9bd5c"
+    },
+    "coding-standards": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "skillPath": "skills/coding-standards/SKILL.md",
+      "computedHash": "ebb4d173fb97f0189986097bcf0c4c4bfa64f0dd713ec094947ccf7b549efbe4"
+    },
+    "error-handling-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/developer-essentials/skills/error-handling-patterns/SKILL.md",
+      "computedHash": "61c0f8496afccbc0b9c46cf0878fac064892cb80981eb6b64ebc5892c71cfec7"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
+    },
+    "i18n": {
+      "source": "lobehub/lobe-chat",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/i18n/SKILL.md",
+      "computedHash": "bd7dd71396626e6a75d6fac2457d0cd7ce2bc598877e4b41d3212c695451ea11"
+    },
+    "rust": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "skillPath": "rust/SKILL.md",
+      "computedHash": "e85ae0543321e3c76af185df298265d3c4db69d2fea70e9a4b8f37b49a89c2a5"
+    },
+    "rust-async-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/systems-programming/skills/rust-async-patterns/SKILL.md",
+      "computedHash": "9203b9abc8238c578887994730421879778720184b027859fecda3f76d31ab05"
+    },
+    "shadcn-ui": {
+      "source": "modelscope.cn",
+      "sourceType": "well-known",
+      "computedHash": "db4066805a6a7b265091f31a11a91e716bf7d4c9443fb5996f6d6e610d4f7c6d"
+    },
+    "shadcn-ui-best-practices": {
+      "source": "modelscope.cn",
+      "sourceType": "well-known",
+      "computedHash": "4fe77ad90014d13da392ff121526796ab0e5930555e5eb3ea79529a9f1e2d65f"
+    },
+    "shadcn-ui-gcristianivan": {
+      "source": "modelscope.cn",
+      "sourceType": "well-known",
+      "computedHash": "3fce10a8a79391c40e938b3d3a23f0f5c7703e3d9a1e202300d88bd9790766ab"
+    },
+    "tauri": {
+      "source": "modelscope.cn",
+      "sourceType": "well-known",
+      "computedHash": "cbbcaba87eb2e0dca8aaea5666ecdfb35b5009987f5911c1938da00acc434603"
+    },
+    "tauri-debugger": {
+      "source": "modelscope.cn",
+      "sourceType": "well-known",
+      "computedHash": "91b7992dfdac40819125f159af1b4d86ffac21506a0e78336d4be8943b902b68"
+    },
+    "tauri-development": {
+      "source": "robinebers/openusage",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/tauri-development/SKILL.md",
+      "computedHash": "70524b334f77c98964e79597b10936c36aa9329e117669d9f0bb8ab3f965c6a5"
+    },
+    "tauri-e2e-testing-archived-20260115": {
+      "source": "modelscope.cn",
+      "sourceType": "well-known",
+      "computedHash": "39ff5f11c0441e8c545054429961f15af26b6113911733d6694b16ed51aef7be"
+    },
+    "tauri-microck-ordinary-claude-skil": {
+      "source": "modelscope.cn",
+      "sourceType": "well-known",
+      "computedHash": "c03139747821e7511f2826d3a7b0479b0cf3e44bf980124e26c530b52ef6628b"
+    },
+    "tauri-rust-patterns": {
+      "source": "modelscope.cn",
+      "sourceType": "well-known",
+      "computedHash": "fb7dd347786c1735f6d15d5f81caa383af9c839aea5a690782b0a09aaab38cb6"
+    },
+    "tauri-window-customization": {
+      "source": "modelscope.cn",
+      "sourceType": "well-known",
+      "computedHash": "c734a284bf98881814e3f30b465f0810b19cb90e4781cff77ed4cc69671cc11f"
+    },
+    "typescript": {
+      "source": "lobehub/lobehub",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/typescript/SKILL.md",
+      "computedHash": "abe73bb8cc070f2f5bbde3d840d5bf12512797a7a92852c637af6b8ecfcb00d4"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/ui-ux-pro-max/SKILL.md",
+      "computedHash": "6337038fe1fe6bbe1b9f252ab678ee575859190bab6f0f246f4061824eb40875"
+    }
+  }
+}

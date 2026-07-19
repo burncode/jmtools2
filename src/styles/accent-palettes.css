@@ -1,0 +1,91 @@
+/*
+ * User accent palettes — driven by html[data-accent] via applyAppAccentColor().
+ * Settings: Display → 强调色. Syncs --app-* and shadcn --primary/--ring.
+ */
+
+.dark[data-accent="blue"] {
+  --app-primary: #2f7df6;
+  --app-primary-hover: #60a5fa;
+  --app-accent: #62d4ff;
+}
+
+.dark[data-accent="cyan"] {
+  --app-primary: #06b6d4;
+  --app-primary-hover: #22d3ee;
+  --app-accent: #67e8f9;
+}
+
+.dark[data-accent="violet"] {
+  --app-primary: #8b5cf6;
+  --app-primary-hover: #a78bfa;
+  --app-accent: #c4b5fd;
+}
+
+.dark[data-accent="amber"] {
+  --app-primary: #f59e0b;
+  --app-primary-hover: #fbbf24;
+  --app-accent: #fcd34d;
+}
+
+.dark[data-accent="rose"] {
+  --app-primary: #f43f5e;
+  --app-primary-hover: #fb7185;
+  --app-accent: #fda4af;
+}
+
+.light[data-accent="blue"] {
+  --app-primary: #2563eb;
+  --app-primary-hover: #1d4ed8;
+  --app-accent: #0284c7;
+}
+
+.light[data-accent="cyan"] {
+  --app-primary: #0891b2;
+  --app-primary-hover: #0e7490;
+  --app-accent: #06b6d4;
+}
+
+.light[data-accent="violet"] {
+  --app-primary: #7c3aed;
+  --app-primary-hover: #6d28d9;
+  --app-accent: #8b5cf6;
+}
+
+.light[data-accent="amber"] {
+  --app-primary: #d97706;
+  --app-primary-hover: #b45309;
+  --app-accent: #f59e0b;
+}
+
+.light[data-accent="rose"] {
+  --app-primary: #e11d48;
+  --app-primary-hover: #be123c;
+  --app-accent: #f43f5e;
+}
+
+.dark[data-accent="blue"],
+.dark[data-accent="cyan"],
+.dark[data-accent="violet"],
+.dark[data-accent="amber"],
+.dark[data-accent="rose"],
+.light[data-accent="blue"],
+.light[data-accent="cyan"],
+.light[data-accent="violet"],
+.light[data-accent="amber"],
+.light[data-accent="rose"] {
+  --app-primary-soft: color-mix(in srgb, var(--app-primary) 16%, transparent);
+  --app-focus: color-mix(in srgb, var(--app-primary) 32%, transparent);
+  --app-control-active: color-mix(in srgb, var(--app-primary) 16%, transparent);
+  --app-control-border-active: var(--app-primary);
+  --app-selected-border: var(--app-primary);
+  --app-selected-ring: var(--app-focus);
+  --app-gradient-primary-from: var(--app-primary);
+  --app-gradient-primary-to: var(--app-accent);
+  --app-gradient-primary-shadow: color-mix(in srgb, var(--app-primary) 28%, transparent);
+  --app-glow-primary: color-mix(in srgb, var(--app-primary) 18%, transparent);
+
+  --primary: var(--app-primary);
+  --ring: var(--app-primary);
+  --sidebar-primary: var(--app-primary);
+  --sidebar-ring: var(--app-primary);
+}

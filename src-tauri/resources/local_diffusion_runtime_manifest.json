@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "releaseTag": "master-656-0e4ee04",
+  "runtimes": [
+    {
+      "id": "sd-cpp-vulkan-win-x64",
+      "label": "stable-diffusion.cpp · Vulkan (Windows x64)",
+      "platform": "windows-x86_64",
+      "channel": "stable",
+      "variant": "vulkan",
+      "packageVersion": "master-656-0e4ee04",
+      "downloadUrl": "https://github.com/leejet/stable-diffusion.cpp/releases/download/master-656-0e4ee04/sd-master-0e4ee04-bin-win-vulkan-x64.zip",
+      "sha256": "",
+      "executable": "sd-cli.exe",
+      "description": "通用 GPU（NVIDIA / AMD / Intel），推荐大多数 Windows 用户。",
+      "estimatedSizeMb": 150
+    },
+    {
+      "id": "sd-cpp-cuda12-win-x64",
+      "label": "stable-diffusion.cpp · CUDA 12 (Windows x64)",
+      "platform": "windows-x86_64",
+      "channel": "stable",
+      "variant": "cuda",
+      "packageVersion": "master-656-0e4ee04",
+      "downloadUrl": "https://github.com/leejet/stable-diffusion.cpp/releases/download/master-656-0e4ee04/sd-master-0e4ee04-bin-win-cuda12-x64.zip",
+      "sha256": "",
+      "executable": "sd-cli.exe",
+      "description": "NVIDIA 独显专用，速度通常优于 Vulkan。",
+      "estimatedSizeMb": 200
+    },
+    {
+      "id": "sd-cpp-avx2-win-x64",
+      "label": "stable-diffusion.cpp · CPU AVX2 (Windows x64)",
+      "platform": "windows-x86_64",
+      "channel": "stable",
+      "variant": "cpu",
+      "packageVersion": "master-656-0e4ee04",
+      "downloadUrl": "https://github.com/leejet/stable-diffusion.cpp/releases/download/master-656-0e4ee04/sd-master-0e4ee04-bin-win-avx2-x64.zip",
+      "sha256": "",
+      "executable": "sd-cli.exe",
+      "description": "无可用 GPU 时的 CPU 备选（速度较慢）。",
+      "estimatedSizeMb": 80
+    }
+  ]
+}

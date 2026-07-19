@@ -1,0 +1,28 @@
+{
+  "id": "hand_paint",
+  "label": "手绘风格",
+  "params": {
+    "styleType": "stylized",
+    "colorTheme": "fantasy",
+    "renderType": "hand_drawn",
+    "pixelDensity": "none",
+    "edgeStyle": "soft",
+    "detail": 0.7,
+    "contrast": 0.6,
+    "saturation": 0.65,
+    "sharpness": 0.35,
+    "paletteMode": "manual",
+    "maxColors": 20,
+    "paletteStrength": 0.75,
+    "dithering": false,
+    "paletteColors": "[\"#3d405b\",\"#81b29a\",\"#f2cc8f\",\"#e07a5f\",\"#f4f1de\",\"#6d597a\",\"#b56576\",\"#355070\"]",
+    "lightingType": "soft",
+    "shadowStrength": 0.4,
+    "highlightStrength": 0.35,
+    "ambient": 0.55,
+    "paletteLock": false,
+    "lineStyleLock": false,
+    "identityLock": false,
+    "consistencyStrength": 0.7
+  }
+}

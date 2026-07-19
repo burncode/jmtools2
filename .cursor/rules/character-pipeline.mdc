@@ -1,0 +1,47 @@
+---
+description: 角色节点工作流架构与编码约束（不含角色工坊 UI）
+globs: src/features/workflows/**,src-tauri/src/engine/executor/character_nodes.rs,src-tauri/src/character/**,src-tauri/src/commands/characters/**,shared/workflow-nodes/**
+alwaysApply: false
+---
+
+# 角色节点工作流规则
+
+遵守 [`communication-zh.mdc`](communication-zh.mdc)：与用户沟通使用简体中文。
+
+## 范围
+
+- character 生产能力以**节点工作台**为一等公民。
+- **不修改** `src/features/characters/`（角色工坊 UI），除非用户明确要求。
+- 角色记录仍写入 `assets/characters/`，与工坊页面无耦合。
+
+## 扩展节点顺序
+
+1. [`shared/workflow-nodes/nodes.json`](shared/workflow-nodes/nodes.json) — 描述符、端口、params
+2. [`character_nodes.rs`](src-tauri/src/engine/executor/character_nodes.rs) — 执行逻辑
+3. [`character/workflow.rs`](src-tauri/src/character/workflow.rs) — workflow 复用门面（写盘/生成编排）
+
+## 职责分离
+
+| 层 | 职责 |
+|----|------|
+| AI 节点 | 产出 masterPlan / candidateImages 等 asset |
+| character 处理节点 | 写 `character.json`、processed、views |
+| Rust 命令 | 校验路径、落盘、索引；错误信息可被中文 UI 展示 |
+| 工作流 UI | Inspector、预览、运行面板；不在组件内硬编码 Prompt |
+
+## 端口与连线
+
+- 使用描述符定义的 port id（如 `characterSeed`、`masterPlan`、`character`）。
+- 新增 kind 时同步 [`connectionValidation.ts`](src/features/workflows/connectionValidation.ts) 若涉及端口 kind 规则。
+- 模板追加在 [`workflowTemplates.ts`](src/features/workflows/workflowTemplates.ts)，布局左→右，中文 `description`。
+
+## 反例
+
+```typescript
+// ❌ 在 WorkflowInspector 为角色写巨型专用分支以对齐工坊
+// ❌ 跳过 character.create，直接从外部图片 bind
+// ❌ 在 Workbench 组件内 invoke 角色命令而绕过节点执行器
+// ❌ 新增图像处理或 prompt 逻辑堆进 commands/characters 单体而不进 character/ 域模块
+```
+
+详见 [`docs/character-generation-pipeline.md`](docs/character-generation-pipeline.md)。

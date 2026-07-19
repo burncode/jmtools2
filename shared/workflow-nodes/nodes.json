@@ -1,0 +1,647 @@
+[
+  {
+    "id": "image.input",
+    "label": "图片输入",
+    "category": "input",
+    "color": "input",
+    "description": "读取项目内或本机图片路径，作为图像处理链路的起点。",
+    "helpText": "用于把已有图片送入工作流。项目相对路径会从当前 JMTools 项目根目录解析。",
+    "status": "available",
+    "inputs": [],
+    "outputs": [{ "id": "image", "kind": "image", "label": "图片" }],
+    "params": [
+      {
+        "id": "sourceKind",
+        "label": "路径类型",
+        "type": "select",
+        "defaultValue": "projectRelativePath",
+        "options": [
+          { "label": "项目相对路径", "value": "projectRelativePath" },
+          { "label": "本机绝对路径", "value": "absolutePath" }
+        ]
+      },
+      {
+        "id": "path",
+        "label": "图片路径",
+        "type": "text",
+        "widget": "projectPath",
+        "required": true,
+        "description": "项目相对路径示例：assets/images/source.png",
+        "defaultValue": ""
+      }
+    ]
+  },
+  {
+    "id": "tool.backgroundRemoval",
+    "label": "去背景",
+    "category": "tool",
+    "color": "tool",
+    "description": "复用 JMTools 通用去背景工具，输出透明 PNG 和质量报告。",
+    "helpText": "首版执行已有素材工具能力。复杂精修仍建议跳转到素材工具专用视图处理。",
+    "status": "available",
+    "inputs": [{ "id": "input", "kind": "image", "label": "输入" }],
+    "outputs": [
+      { "id": "image", "kind": "image", "label": "图片" },
+      { "id": "toolResult", "kind": "toolResult", "label": "结果" }
+    ],
+    "params": [
+      { "id": "engine", "label": "算法", "type": "select", "defaultValue": "chroma", "options": [{ "label": "快速纯色背景", "value": "chroma" }, { "label": "AI 语义去背景", "value": "rembg" }] },
+      { "id": "tolerance", "label": "容差", "type": "number", "widget": "slider", "defaultValue": 34, "min": 4, "max": 96 },
+      { "id": "edgeSoftness", "label": "边缘柔化", "type": "number", "widget": "slider", "defaultValue": 24, "min": 0, "max": 96 },
+      { "id": "cleanupStrength", "label": "碎点清理", "type": "select", "defaultValue": "standard", "options": [{ "label": "关闭", "value": "off" }, { "label": "轻度", "value": "soft" }, { "label": "标准", "value": "standard" }, { "label": "严格", "value": "strict" }] },
+      { "id": "holeFillMaxPixels", "label": "孔洞填补", "type": "number", "widget": "slider", "defaultValue": 128, "min": 0, "max": 4096 },
+      { "id": "spillSuppression", "label": "残色抑制", "type": "number", "widget": "slider", "defaultValue": 45, "min": 0, "max": 100 },
+      { "id": "preserveSmallParts", "label": "保留小部件", "type": "boolean", "defaultValue": false }
+    ]
+  },
+  {
+    "id": "character.load",
+    "label": "读取角色",
+    "category": "character",
+    "color": "asset",
+    "description": "读取项目中的角色资产记录，用于后续后处理或绑定。",
+    "helpText": "需要填写已有角色 ID。此节点只读取角色记录，不修改项目资产。",
+    "status": "available",
+    "inputs": [],
+    "outputs": [{ "id": "character", "kind": "character", "label": "角色" }],
+    "params": [{ "id": "characterId", "label": "角色 ID", "type": "text", "widget": "characterRef", "required": true, "defaultValue": "" }]
+  },
+  {
+    "id": "character.bindToolResult",
+    "label": "绑定角色结果",
+    "category": "character",
+    "color": "asset",
+    "description": "把上游工具结果绑定到角色视图，写入透明图和处理元数据。",
+    "helpText": "需要上游工具结果和目标角色 ID。运行后可从节点结果打开角色工坊继续精修。",
+    "status": "available",
+    "inputs": [
+      { "id": "character", "kind": "character", "label": "角色" },
+      { "id": "toolResult", "kind": "toolResult", "label": "工具结果" }
+    ],
+    "outputs": [{ "id": "character", "kind": "character", "label": "角色" }],
+    "params": [
+      { "id": "characterId", "label": "角色 ID", "type": "text", "widget": "characterRef", "required": false, "defaultValue": "" },
+      { "id": "viewId", "label": "视图 ID", "type": "text", "description": "留空时使用当前记录的默认视图。", "defaultValue": "" }
+    ]
+  },
+  {
+    "id": "ai.prompt",
+    "label": "AI 提示词",
+    "category": "ai",
+    "color": "ai",
+    "description": "整理或增强图像生成提示词。",
+    "helpText": "可手动填写 prompt，也可开启增强后调用已配置的文本模型。",
+    "status": "available",
+    "inputs": [{ "id": "prompt", "kind": "asset", "label": "提示词" }],
+    "outputs": [{ "id": "prompt", "kind": "asset", "label": "提示词" }],
+    "params": [
+      { "id": "prompt", "label": "提示词", "type": "text", "widget": "textarea", "required": true, "defaultValue": "" },
+      { "id": "negativePrompt", "label": "负向提示词", "type": "text", "widget": "textarea", "defaultValue": "" },
+      { "id": "enhance", "label": "AI 增强", "type": "boolean", "defaultValue": false },
+      { "id": "providerId", "label": "文本服务商 ID", "type": "text", "defaultValue": "" },
+      { "id": "model", "label": "文本模型", "type": "text", "defaultValue": "" }
+    ]
+  },
+  {
+    "id": "ai.imageGenerate",
+    "label": "AI 生图",
+    "category": "ai",
+    "color": "ai",
+    "description": "根据提示词生成图片并写入项目生成目录。",
+    "helpText": "默认使用设置中的角色图像模型；也可在参数中覆盖 provider/model。",
+    "status": "available",
+    "inputs": [{ "id": "prompt", "kind": "asset", "label": "提示词" }],
+    "outputs": [{ "id": "image", "kind": "image", "label": "图片" }],
+    "params": [
+      { "id": "prompt", "label": "提示词", "type": "text", "widget": "textarea", "required": true, "defaultValue": "" },
+      { "id": "providerId", "label": "图像服务商 ID", "type": "text", "defaultValue": "" },
+      { "id": "model", "label": "图像模型", "type": "text", "defaultValue": "" }
+    ]
+  },
+  {
+    "id": "preview.image",
+    "label": "图片预览",
+    "category": "preview",
+    "color": "preview",
+    "description": "显示上游图片或工具输出，作为画布中的检查点。",
+    "helpText": "预览节点会透传上游输出，方便在画布中放置检查点；也可接入角色预览动作帧。",
+    "status": "available",
+    "inputs": [
+      { "id": "input", "kind": "image", "label": "输入" },
+      { "id": "character", "kind": "character", "label": "角色" }
+    ],
+    "outputs": [{ "id": "output", "kind": "image", "label": "输出" }],
+    "params": []
+  },
+  {
+    "id": "preview.actionSequence",
+    "label": "动作序列预览",
+    "category": "preview",
+    "color": "preview",
+    "description": "预览角色动作帧序列，支持按方向切换与帧条检查。",
+    "helpText": "接入 character 输出；透传角色供下游导出。生成动作请使用「生成动作帧」节点。",
+    "status": "available",
+    "inputs": [{ "id": "character", "kind": "character", "label": "角色" }],
+    "outputs": [{ "id": "character", "kind": "character", "label": "角色" }],
+    "params": [
+      { "id": "actionId", "label": "动作", "type": "select", "defaultValue": "idle", "display": "inline", "options": [{ "label": "待机", "value": "idle" }, { "label": "行走", "value": "walk" }, { "label": "攻击", "value": "attack" }] },
+      { "id": "viewKind", "label": "方向", "type": "select", "defaultValue": "auto", "display": "inline", "options": [{ "label": "全部", "value": "auto" }, { "label": "前", "value": "front" }, { "label": "后", "value": "back" }, { "label": "左", "value": "left" }, { "label": "右", "value": "right" }, { "label": "左前", "value": "frontLeft" }, { "label": "右前", "value": "frontRight" }, { "label": "左后", "value": "backLeft" }, { "label": "右后", "value": "backRight" }] },
+      { "id": "previewFps", "label": "预览帧率", "type": "number", "widget": "slider", "defaultValue": 8, "display": "inline", "min": 1, "max": 60 }
+    ]
+  },
+  {
+    "id": "output.asset",
+    "label": "输出资产",
+    "category": "output",
+    "color": "output",
+    "description": "标记最终输出，方便运行面板定位产物。",
+    "helpText": "输出节点不生成新资产，只作为最终产物标记和历史定位入口。",
+    "status": "available",
+    "inputs": [{ "id": "input", "kind": "asset", "label": "输入" }],
+    "outputs": [{ "id": "output", "kind": "asset", "label": "输出" }],
+    "params": []
+  },
+  {
+    "id": "output.spritesheet",
+    "label": "导出精灵图",
+    "category": "output",
+    "color": "output",
+    "description": "将上游图片导出为 PNG + JSON 精灵描述。",
+    "helpText": "首版导出单帧 spritesheet，后续可扩展 atlas 打包。",
+    "status": "available",
+    "inputs": [{ "id": "input", "kind": "image", "label": "输入" }],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "导出" }],
+    "params": [{ "id": "fileName", "label": "文件名", "type": "text", "defaultValue": "spritesheet" }]
+  },
+  {
+    "id": "character.inputSeed",
+    "label": "角色基础输入",
+    "category": "character",
+    "color": "character",
+    "description": "定义角色名称、性别、年龄、种族和职业等基础属性。",
+    "helpText": "输出 characterSeed asset，可单独运行验证，也可接入提示词合并节点。",
+    "status": "available",
+    "inputs": [],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "角色种子" }],
+    "params": [
+      { "id": "name", "label": "名称", "type": "text", "defaultValue": "新角色" },
+      { "id": "gender", "label": "性别", "type": "select", "defaultValue": "unknown", "options": [{ "label": "男", "value": "male" }, { "label": "女", "value": "female" }, { "label": "未知", "value": "unknown" }] },
+      { "id": "age", "label": "年龄", "type": "number", "defaultValue": 20, "min": 1, "max": 999 },
+      { "id": "race", "label": "种族", "type": "select", "defaultValue": "human", "options": [{ "label": "人类", "value": "human" }, { "label": "精灵", "value": "elf" }, { "label": "兽人", "value": "orc" }, { "label": "自定义", "value": "custom" }] },
+      { "id": "characterClass", "label": "职业", "type": "select", "defaultValue": "warrior", "options": [{ "label": "战士", "value": "warrior" }, { "label": "法师", "value": "mage" }, { "label": "弓手", "value": "archer" }, { "label": "自定义", "value": "custom" }] }
+    ]
+  },
+  {
+    "id": "character.styleProfile",
+    "label": "引用风格资产",
+    "category": "character",
+    "color": "character",
+    "layer": "semantic",
+    "description": "引用全局风格预设资产，输出 styleProfile；完整编辑请打开风格预设库。",
+    "helpText": "节点仅保存 presetId 与可选局部覆盖参数；Visual DNA / 调色 / 光照 / 约束在风格预设库中编辑。",
+    "status": "available",
+    "paramGroups": [
+      { "id": "overview", "label": "概览" },
+      { "id": "override", "label": "节点覆盖" }
+    ],
+    "inputs": [],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "风格" }],
+    "params": [
+      { "id": "presetId", "label": "风格预设 ID", "type": "text", "group": "overview", "defaultValue": "pixel_retro_16" },
+      { "id": "preset", "label": "风格预设", "type": "text", "group": "overview", "defaultValue": "pixel_retro_16", "description": "与 presetId 同步，兼容旧工作流。" },
+      { "id": "enableLocalOverride", "label": "启用局部覆盖", "type": "boolean", "group": "override", "defaultValue": false },
+      { "id": "styleWeight", "label": "风格权重", "type": "number", "group": "override", "defaultValue": 0.85, "min": 0, "max": 1, "description": "当前节点对所选预设风格的整体权重。" },
+      { "id": "consistencyStrength", "label": "一致性强度", "type": "number", "group": "override", "defaultValue": 0.92, "min": 0, "max": 1, "description": "覆盖预设的一致性强度，用于该节点局部微调。" },
+      { "id": "referenceStrength", "label": "参考图权重", "type": "number", "widget": "slider", "group": "override", "defaultValue": 0.6, "min": 0, "max": 1, "description": "艺术参考图对该节点生成结果的影响权重。" },
+      { "id": "negativeConstraintStrength", "label": "负面约束强度", "type": "number", "group": "override", "defaultValue": 0.8, "min": 0, "max": 1, "description": "负面约束在 prompt 中的强调程度。" }
+    ]
+  },
+  {
+    "id": "character.outfitProfile",
+    "label": "装备外观",
+    "category": "character",
+    "color": "character",
+    "description": "定义发型、盔甲、武器与配饰层。",
+    "helpText": "输出 outfitProfile asset，供 logic.promptMerge 合并。",
+    "status": "available",
+    "inputs": [],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "外观" }],
+    "params": [
+      { "id": "hairStyle", "label": "发型", "type": "text", "defaultValue": "" },
+      { "id": "helmet", "label": "头盔", "type": "text", "defaultValue": "" },
+      { "id": "armorType", "label": "盔甲", "type": "text", "defaultValue": "" },
+      { "id": "clothStyle", "label": "服装", "type": "text", "defaultValue": "" },
+      { "id": "weaponType", "label": "武器", "type": "text", "defaultValue": "" },
+      { "id": "weaponSize", "label": "武器尺寸", "type": "select", "defaultValue": "medium", "options": [{ "label": "小", "value": "small" }, { "label": "中", "value": "medium" }, { "label": "大", "value": "large" }] },
+      { "id": "cape", "label": "披风", "type": "text", "defaultValue": "" },
+      { "id": "auraEffect", "label": "光环效果", "type": "text", "defaultValue": "" }
+    ]
+  },
+  {
+    "id": "ai.negativePrompt",
+    "label": "负向提示词",
+    "category": "ai",
+    "color": "ai",
+    "description": "整理生成时要排除的质量问题与结构错误。",
+    "helpText": "输出 promptText asset（仅 negativeText），可接入提示词合并。",
+    "status": "available",
+    "inputs": [],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "负向词" }],
+    "params": [
+      { "id": "excludeTerms", "label": "排除词", "type": "text", "widget": "textarea", "defaultValue": "blurry, low quality, deformed hands, extra limbs", "description": "逗号分隔" }
+    ]
+  },
+  {
+    "id": "logic.promptMerge",
+    "label": "提示词合并",
+    "category": "logic",
+    "color": "logic",
+    "description": "将角色种子、风格、外观等 asset 合并为最终 prompt。",
+    "helpText": "可单独用 mock 上游 asset 节点验证；输出 promptText asset。",
+    "status": "available",
+    "inputs": [
+      { "id": "characterSeed", "kind": "asset", "label": "角色种子" },
+      { "id": "styleProfile", "kind": "asset", "label": "风格" },
+      { "id": "outfitProfile", "kind": "asset", "label": "外观" },
+      { "id": "negativePrompt", "kind": "asset", "label": "负向词" }
+    ],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "提示词" }],
+    "params": [
+      { "id": "prefix", "label": "前缀", "type": "text", "defaultValue": "pixel art game character" },
+      { "id": "suffix", "label": "后缀", "type": "text", "defaultValue": "" },
+      { "id": "negativePrompt", "label": "附加负向词", "type": "text", "defaultValue": "" }
+    ]
+  },
+  {
+    "id": "character.create",
+    "label": "创建角色",
+    "category": "character",
+    "color": "character",
+    "description": "在项目中创建角色资产记录；接入候选图时自动写入母版图。",
+    "helpText": "可单独运行；可选接入 characterSeed、masterPlan 与 candidateImages。接入候选图后按 selectedPlanId 或推荐分自动选型并复制 masterImage。",
+    "status": "available",
+    "inputs": [
+      { "id": "characterSeed", "kind": "asset", "label": "角色种子" },
+      { "id": "masterPlan", "kind": "asset", "label": "母版方案" },
+      { "id": "candidateImages", "kind": "asset", "label": "候选图" },
+      { "id": "manualSelection", "kind": "text", "label": "人工选择" }
+    ],
+    "outputs": [{ "id": "character", "kind": "character", "label": "角色" }],
+    "params": [
+      { "id": "name", "label": "名称", "type": "text", "defaultValue": "" },
+      { "id": "description", "label": "描述", "type": "text", "defaultValue": "工作流创建的角色。" },
+      { "id": "style", "label": "风格", "type": "text", "defaultValue": "pixel" },
+      { "id": "size", "label": "画布", "type": "text", "defaultValue": "64x64" },
+      { "id": "direction", "label": "方向", "type": "select", "defaultValue": "single", "display": "inline", "options": [{ "label": "单视图", "value": "single" }, { "label": "四方向", "value": "four" }, { "label": "八方向", "value": "eight" }] },
+      { "id": "selectedPlanId", "label": "选中方案", "type": "text", "defaultValue": "", "widget": "candidatePlanPicker", "description": "留空则按推荐分自动选择；也可在下方点选候选图。" }
+    ]
+  },
+  {
+    "id": "character.generatePlan",
+    "label": "生成母版方案",
+    "category": "character",
+    "color": "character",
+    "description": "调用文本 AI 生成结构化母版方案 JSON（非 Prompt 润色）。",
+    "helpText": "输入编译后的 promptBundle 与角色种子，输出 masterPlan asset（含 pixelPrompt 与候选方案列表）。默认使用设置中的「文本生成」绑定，可在节点内覆盖。",
+    "status": "available",
+    "paramGroups": [
+      { "id": "ai", "label": "AI 配置" },
+      { "id": "meta", "label": "元数据" }
+    ],
+    "inputs": [
+      { "id": "characterSeed", "kind": "asset", "label": "角色种子" },
+      { "id": "promptBundle", "kind": "asset", "label": "编译提示词" }
+    ],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "母版方案" }],
+    "params": [
+      { "id": "name", "label": "名称", "type": "text", "group": "meta", "defaultValue": "" },
+      { "id": "description", "label": "描述", "type": "text", "group": "meta", "defaultValue": "" },
+      { "id": "style", "label": "风格", "type": "text", "group": "meta", "defaultValue": "pixel" },
+      { "id": "candidateCount", "label": "候选数量", "type": "number", "widget": "slider", "group": "meta", "defaultValue": 2, "display": "inline", "min": 1, "max": 4, "description": "母版方案应包含的候选方案数量（1–4）。" },
+      { "id": "providerId", "label": "文本 AI", "type": "text", "group": "ai", "defaultValue": "", "widget": "aiProviderSelect", "binding": "text", "description": "留空则跟随设置中的「文本生成」绑定。" },
+      { "id": "model", "label": "文本模型", "type": "text", "group": "ai", "defaultValue": "", "advanced": true },
+      { "id": "taskId", "label": "任务 ID", "type": "text", "defaultValue": "", "widget": "runId", "advanced": true }
+    ]
+  },
+  {
+    "id": "character.generateCandidates",
+    "label": "生成候选图",
+    "category": "character",
+    "color": "character",
+    "description": "根据母版方案生成候选母版图。",
+    "helpText": "需要已配置 AI 图像 provider；输出 candidateImages asset。默认使用设置中的「角色生成」绑定，可在节点内覆盖。",
+    "status": "available",
+    "paramGroups": [
+      { "id": "ai", "label": "AI 配置" },
+      { "id": "meta", "label": "元数据" }
+    ],
+    "inputs": [
+      { "id": "masterPlan", "kind": "asset", "label": "母版方案" },
+      { "id": "characterSeed", "kind": "asset", "label": "角色种子" },
+      { "id": "promptBundle", "kind": "asset", "label": "编译提示词" }
+    ],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "候选图" }],
+    "params": [
+      { "id": "name", "label": "名称", "type": "text", "group": "meta", "defaultValue": "" },
+      { "id": "description", "label": "描述", "type": "text", "group": "meta", "defaultValue": "" },
+      { "id": "style", "label": "风格", "type": "text", "group": "meta", "defaultValue": "pixel" },
+      { "id": "providerId", "label": "图像 AI", "type": "text", "group": "ai", "defaultValue": "", "widget": "aiProviderSelect", "binding": "character", "description": "留空则跟随设置中的「角色生成」绑定。" },
+      { "id": "model", "label": "图像模型", "type": "text", "group": "ai", "defaultValue": "", "advanced": true },
+      { "id": "candidateCount", "label": "候选数量", "type": "number", "widget": "slider", "group": "meta", "defaultValue": 2, "display": "inline", "min": 1, "max": 4, "description": "生成候选图数量（1–4）。" },
+      { "id": "taskId", "label": "任务 ID", "type": "text", "defaultValue": "", "widget": "runId", "advanced": true }
+    ]
+  },
+  {
+    "id": "character.generateViews",
+    "label": "生成视图",
+    "category": "character",
+    "color": "character",
+    "description": "为已有角色生成缺失方向视图。",
+    "helpText": "需要角色已有母版图。可将 image.input 连到「姿势/视图参考」端口，并设 referenceMode=双参考，用角色图保身份、参考图保姿势/构图。",
+    "status": "available",
+    "inputs": [
+      { "id": "character", "kind": "character", "label": "角色" },
+      { "id": "poseReference", "kind": "image", "label": "姿势/视图参考" }
+    ],
+    "outputs": [{ "id": "character", "kind": "character", "label": "角色" }],
+    "params": [
+      { "id": "characterId", "label": "角色 ID", "type": "text", "widget": "characterRef", "required": false, "defaultValue": "" },
+      { "id": "referenceMode", "label": "参考模式", "type": "select", "defaultValue": "characterOnly", "display": "inline", "options": [{ "label": "仅角色正面", "value": "characterOnly" }, { "label": "角色+姿势参考", "value": "dualReference" }], "description": "双参考：角色正面图约束身份，连线的姿势/视图参考图约束构图与朝向。" },
+      { "id": "viewMode", "label": "视图模式", "type": "select", "defaultValue": "followCharacter", "display": "inline", "options": [{ "label": "跟随角色", "value": "followCharacter" }, { "label": "单视图", "value": "single" }, { "label": "四方向", "value": "four" }, { "label": "八方向", "value": "eight" }] },
+      { "id": "generationStrategy", "label": "生成策略", "type": "select", "defaultValue": "threeViewMirror", "display": "inline", "options": [{ "label": "三视图+镜像（省 API）", "value": "threeViewMirror" }, { "label": "逐视图独立生成", "value": "perView" }, { "label": "Turnaround 单图拆分", "value": "turnaroundGrid" }], "description": "三视图+镜像省 API；逐视图独立生成更灵活；Turnaround 单图一次生成四向后拆分，一致性最强。" },
+      { "id": "referenceStrength", "label": "参考强度", "type": "number", "widget": "slider", "defaultValue": 0.7, "display": "inline", "min": 0, "max": 1, "description": "img2img 对参考图的依赖强度（仅 Qwen 生效）；双参考模式下主要作用于姿势/视图参考图。" },
+      { "id": "views", "label": "限定视图", "type": "text", "defaultValue": "", "advanced": true, "description": "逗号分隔：front,back,left,right 等；留空则生成全部缺失视图。" }
+    ]
+  },
+  {
+    "id": "character.removeBackground",
+    "label": "角色去背景",
+    "category": "character",
+    "color": "character",
+    "description": "对角色视图执行专用去背景并写回记录。",
+    "helpText": "与通用 tool.backgroundRemoval 并存；输出 character。",
+    "status": "available",
+    "inputs": [{ "id": "character", "kind": "character", "label": "角色" }],
+    "outputs": [{ "id": "character", "kind": "character", "label": "角色" }],
+    "params": [
+      { "id": "characterId", "label": "角色 ID", "type": "text", "widget": "characterRef", "required": false, "defaultValue": "" },
+      { "id": "viewId", "label": "视图 ID", "type": "text", "defaultValue": "", "advanced": true },
+      { "id": "engine", "label": "算法", "type": "select", "defaultValue": "chroma", "display": "inline", "options": [{ "label": "快速纯色背景", "value": "chroma" }, { "label": "AI 语义去背景", "value": "rembg" }] },
+      { "id": "tolerance", "label": "容差", "type": "number", "widget": "slider", "defaultValue": 34, "display": "inline", "min": 4, "max": 96 },
+      { "id": "edgeSoftness", "label": "边缘柔化", "type": "number", "widget": "slider", "defaultValue": 24, "display": "inline", "min": 0, "max": 96 },
+      { "id": "cleanupStrength", "label": "碎点清理", "type": "select", "defaultValue": "standard", "display": "inline", "options": [{ "label": "关闭", "value": "off" }, { "label": "轻度", "value": "soft" }, { "label": "标准", "value": "standard" }, { "label": "严格", "value": "strict" }] },
+      { "id": "holeFillMaxPixels", "label": "孔洞填补", "type": "number", "widget": "slider", "defaultValue": 128, "display": "inline", "min": 0, "max": 4096 },
+      { "id": "spillSuppression", "label": "残色抑制", "type": "number", "widget": "slider", "defaultValue": 45, "display": "inline", "min": 0, "max": 100 },
+      { "id": "preserveSmallParts", "label": "保留小部件", "type": "boolean", "display": "inline", "defaultValue": false },
+      { "id": "alphaMatting", "label": "Alpha 精修", "type": "boolean", "defaultValue": false, "advanced": true, "description": "rembg 模式下启用 alpha matting 精修边缘。" }
+    ]
+  },
+  {
+    "id": "character.normalize",
+    "label": "角色规范化",
+    "category": "character",
+    "color": "character",
+    "description": "将角色视图缩放到目标画布尺寸并贴齐脚线（可选步骤）。",
+    "helpText": "非必须步骤：若只需预览或原分辨率导出，可跳过本节点，直接使用去背景透明图。需要图集打包、Godot SpriteFrames、碰撞盒或四方向脚线对齐时再规范化。默认 64×64 会从 AI 大图缩小导致变糊；高分辨率流水线可开启「保留源分辨率」或增大宽高并选「仅居中」。paletteSize 保持 0 可避免颜色量化。输入优先使用去背景透明图。",
+    "status": "available",
+    "inputs": [
+      { "id": "character", "kind": "character", "label": "角色" },
+      { "id": "input", "kind": "image", "label": "图片" }
+    ],
+    "outputs": [
+      { "id": "character", "kind": "character", "label": "角色" },
+      { "id": "image", "kind": "image", "label": "图片" }
+    ],
+    "params": [
+      { "id": "characterId", "label": "角色 ID", "type": "text", "widget": "characterRef", "required": false, "defaultValue": "" },
+      { "id": "viewId", "label": "视图 ID", "type": "text", "defaultValue": "", "advanced": true },
+      { "id": "targetWidth", "label": "宽度", "type": "number", "widget": "slider", "defaultValue": 64, "display": "inline", "min": 16, "max": 512 },
+      { "id": "targetHeight", "label": "高度", "type": "number", "widget": "slider", "defaultValue": 64, "display": "inline", "min": 16, "max": 512 },
+      { "id": "preserveSourceResolution", "label": "保留源分辨率", "type": "boolean", "display": "inline", "defaultValue": false, "description": "开启后仅居中贴齐脚线，不缩放（等同 scaleMode=仅居中）。" },
+      { "id": "scaleMode", "label": "缩放方式", "type": "select", "defaultValue": "integer", "display": "inline", "options": [{ "label": "整数倍(像素清晰)", "value": "integer" }, { "label": "等比适配", "value": "fit" }, { "label": "仅居中(原生)", "value": "none" }], "description": "整数倍降采样可避免像素糊边；等比适配填满画布；仅居中保留原生分辨率。" },
+      { "id": "paletteSize", "label": "调色板色数", "type": "number", "widget": "slider", "defaultValue": 0, "display": "inline", "min": 0, "max": 256, "description": "0=关闭；>0 时将颜色量化到该数量，得到有限色板的像素风（透明区保留）。" }
+    ]
+  },
+  {
+    "id": "output.spriteSplit",
+    "label": "帧切分",
+    "category": "output",
+    "color": "output",
+    "description": "将网格/spritesheet 图片切分为独立帧文件。",
+    "helpText": "输出 spriteFrames asset，可接 animationExport。",
+    "status": "available",
+    "inputs": [{ "id": "input", "kind": "image", "label": "输入" }],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "帧列表" }],
+    "params": [
+      { "id": "frameWidth", "label": "帧宽", "type": "number", "defaultValue": 64, "min": 8, "max": 512 },
+      { "id": "frameHeight", "label": "帧高", "type": "number", "defaultValue": 64, "min": 8, "max": 512 },
+      { "id": "columns", "label": "列数", "type": "number", "defaultValue": 1, "min": 1, "max": 32 },
+      { "id": "rows", "label": "行数", "type": "number", "defaultValue": 1, "min": 1, "max": 32 },
+      { "id": "exportName", "label": "导出目录名", "type": "text", "defaultValue": "frames" }
+    ]
+  },
+  {
+    "id": "output.atlasPack",
+    "label": "图集打包",
+    "category": "output",
+    "color": "output",
+    "description": "将网格图片打包为 atlas PNG + JSON。",
+    "helpText": "输出 atlas asset，与 output.spritesheet 类似但支持多帧网格。",
+    "status": "available",
+    "inputs": [
+      { "id": "input", "kind": "image", "label": "输入" },
+      { "id": "character", "kind": "character", "label": "角色" }
+    ],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "图集" }],
+    "params": [
+      { "id": "fileName", "label": "文件名", "type": "text", "defaultValue": "atlas" },
+      { "id": "frameWidth", "label": "帧宽", "type": "number", "defaultValue": 64, "min": 8, "max": 512 },
+      { "id": "frameHeight", "label": "帧高", "type": "number", "defaultValue": 64, "min": 8, "max": 512 },
+      { "id": "columns", "label": "列数", "type": "number", "defaultValue": 1, "min": 1, "max": 32 },
+      { "id": "rows", "label": "行数", "type": "number", "defaultValue": 1, "min": 1, "max": 32 }
+    ]
+  },
+  {
+    "id": "output.animationExport",
+    "label": "动画导出",
+    "category": "output",
+    "color": "output",
+    "description": "导出游戏引擎可用的动画描述 JSON。",
+    "helpText": "首版支持 Godot 风格 JSON；输入 frames asset 或 character（含动作帧）。",
+    "status": "available",
+    "inputs": [
+      { "id": "frames", "kind": "asset", "label": "帧列表" },
+      { "id": "character", "kind": "character", "label": "角色" }
+    ],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "动画" }],
+    "params": [
+      { "id": "fileName", "label": "文件名", "type": "text", "defaultValue": "animation" },
+      { "id": "animationName", "label": "动画名", "type": "text", "defaultValue": "idle" },
+      { "id": "targetEngine", "label": "目标引擎", "type": "select", "defaultValue": "godot", "options": [{ "label": "Godot", "value": "godot" }, { "label": "Unity", "value": "unity" }, { "label": "Spine", "value": "spine" }] },
+      { "id": "fps", "label": "帧率", "type": "number", "defaultValue": 8, "min": 1, "max": 60 }
+    ]
+  },
+  {
+    "id": "logic.promptCompiler",
+    "label": "Prompt 编译器",
+    "category": "logic",
+    "color": "logic",
+    "layer": "semantic",
+    "description": "将语义与控制输入编译为 promptBundle（AST + 正负向 prompt）。",
+    "helpText": "推荐替代 promptMerge 作为 AI 链入口；输出 promptBundle asset。",
+    "status": "available",
+    "paramGroups": [
+      { "id": "semantic", "label": "语义" },
+      { "id": "control", "label": "控制" }
+    ],
+    "inputs": [
+      { "id": "characterSeed", "kind": "asset", "label": "角色种子" },
+      { "id": "styleProfile", "kind": "asset", "label": "风格" },
+      { "id": "outfitProfile", "kind": "asset", "label": "外观" },
+      { "id": "negativePrompt", "kind": "asset", "label": "负向词" },
+      { "id": "controlProfile", "kind": "asset", "label": "控制配置" }
+    ],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "编译提示词" }],
+    "params": [
+      { "id": "prefix", "label": "前缀", "type": "text", "group": "semantic", "defaultValue": "pixel art game character" },
+      { "id": "suffix", "label": "后缀", "type": "text", "group": "semantic", "defaultValue": "" },
+      { "id": "negativePrompt", "label": "附加负向词", "type": "text", "group": "semantic", "defaultValue": "" },
+      { "id": "weights", "label": "权重 JSON", "type": "text", "group": "control", "defaultValue": "", "description": "示例：{\"style\":1.2,\"subject\":1.4}" },
+      { "id": "overrideSlots", "label": "覆盖 JSON", "type": "text", "group": "control", "defaultValue": "", "description": "示例：{\"subject\":\"mage hero\"}" }
+    ]
+  },
+  {
+    "id": "control.consistencyLock",
+    "label": "一致性锁定",
+    "category": "logic",
+    "color": "logic",
+    "layer": "control",
+    "description": "根据 seed/style 生成 consistencyHash，可选锁定风格。",
+    "helpText": "输出 controlProfile asset，接入 Prompt 编译器。",
+    "status": "available",
+    "inputs": [
+      { "id": "characterSeed", "kind": "asset", "label": "角色种子" },
+      { "id": "styleProfile", "kind": "asset", "label": "风格" }
+    ],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "控制配置" }],
+    "params": [
+      { "id": "styleLock", "label": "锁定风格", "type": "select", "defaultValue": "true", "options": [{ "label": "是", "value": "true" }, { "label": "否", "value": "false" }] },
+      { "id": "fallbackKey", "label": "回退键", "type": "text", "defaultValue": "workflow" }
+    ]
+  },
+  {
+    "id": "control.referenceStrength",
+    "label": "参考图强度",
+    "category": "logic",
+    "color": "logic",
+    "layer": "control",
+    "description": "设置参考图影响强度 0–1。",
+    "helpText": "输出 controlProfile asset。",
+    "status": "available",
+    "inputs": [],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "控制配置" }],
+    "params": [
+      { "id": "strength", "label": "强度", "type": "number", "defaultValue": 0.8, "min": 0, "max": 1 }
+    ]
+  },
+  {
+    "id": "control.seedLock",
+    "label": "Seed 锁定",
+    "category": "logic",
+    "color": "logic",
+    "layer": "control",
+    "description": "固定随机 seed，写入 controlProfile。",
+    "helpText": "输出 controlProfile asset，供生成节点读取。",
+    "status": "available",
+    "inputs": [],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "控制配置" }],
+    "params": [
+      { "id": "seed", "label": "Seed", "type": "number", "defaultValue": 42, "min": 0, "max": 4294967295 }
+    ]
+  },
+  {
+    "id": "control.manualGate",
+    "label": "人工节点",
+    "category": "logic",
+    "color": "logic",
+    "layer": "control",
+    "description": "执行到此暂停，等待用户在候选项中做出选择后再继续；选择会随输出透传。",
+    "helpText": "用于方案选择、入库确认等需要人工参与的判断。运行到该节点会暂停并弹出选择，确认后从下游继续；可关闭应用后再恢复。",
+    "status": "available",
+    "inputs": [
+      { "id": "character", "kind": "character", "label": "角色" },
+      { "id": "candidateImages", "kind": "asset", "label": "候选图" }
+    ],
+    "outputs": [
+      { "id": "character", "kind": "character", "label": "角色" },
+      { "id": "candidateImages", "kind": "asset", "label": "候选图" },
+      { "id": "manualSelection", "kind": "text", "label": "人工选择" }
+    ],
+    "params": [
+      { "id": "optionsSource", "label": "候选项来源", "type": "select", "display": "inline", "defaultValue": "static", "options": [{ "label": "静态列表", "value": "static" }, { "label": "上游候选图", "value": "candidateImages" }], "description": "选「上游候选图」时从 candidateImages 端口动态生成 planId 候选项。" },
+      { "id": "prompt", "label": "提示语", "type": "text", "display": "inline", "defaultValue": "请选择后继续执行", "description": "暂停时展示给用户的问题或说明。" },
+      { "id": "options", "label": "候选项", "type": "text", "display": "inline", "defaultValue": "方案A,方案B", "description": "静态来源时用逗号分隔；候选图来源时忽略。" },
+      { "id": "allowMultiple", "label": "允许多选", "type": "boolean", "display": "inline", "defaultValue": false, "description": "开启后用户可同时选择多个候选项。" }
+    ]
+  },
+  {
+    "id": "character.analyze",
+    "label": "图像预检",
+    "category": "character",
+    "color": "character",
+    "layer": "asset",
+    "description": "质量检查：分析 bbox、Alpha 覆盖率与脚底线，写入 processing 元数据。",
+    "helpText": "需要 character 输入或 characterId；不修改图像文件，仅做 QC 预检供后续多视图/导出门禁。",
+    "status": "available",
+    "inputs": [{ "id": "character", "kind": "character", "label": "角色" }],
+    "outputs": [{ "id": "character", "kind": "character", "label": "角色" }],
+    "params": [
+      { "id": "characterId", "label": "角色 ID", "type": "text", "widget": "characterRef", "defaultValue": "", "advanced": true },
+      { "id": "viewId", "label": "视图 ID", "type": "text", "defaultValue": "", "advanced": true },
+      { "id": "minAlphaCoverage", "label": "最低前景占比(%)", "type": "number", "widget": "slider", "defaultValue": 6, "display": "inline", "min": 0, "max": 100, "description": "前景 Alpha 覆盖率低于此值时记为预检告警。" },
+      { "id": "maxBboxRatio", "label": "最大占画布(%)", "type": "number", "widget": "slider", "defaultValue": 98, "display": "inline", "min": 10, "max": 100, "description": "角色包围盒高度占画布超过此值时记为预检告警（可能被裁切）。" }
+    ]
+  },
+  {
+    "id": "character.generateActionFrames",
+    "label": "生成动作帧",
+    "category": "character",
+    "color": "character",
+    "layer": "asset",
+    "description": "为已有视图生成动作帧序列到 animations/<action>/<view>/，自动继承透明规范化图。",
+    "helpText": "动作类型可多选。默认以角色视图做 img2img；可将 image.input 连到「动作参考」并设 referenceMode=双参考，用角色图保身份、动作参考图驱动姿态。",
+    "status": "available",
+    "inputs": [
+      { "id": "character", "kind": "character", "label": "角色" },
+      { "id": "poseReference", "kind": "image", "label": "动作参考" }
+    ],
+    "outputs": [{ "id": "character", "kind": "character", "label": "角色" }],
+    "params": [
+      { "id": "characterId", "label": "角色 ID", "type": "text", "widget": "characterRef", "required": false, "defaultValue": "", "advanced": true },
+      { "id": "referenceMode", "label": "参考模式", "type": "select", "defaultValue": "characterOnly", "display": "inline", "options": [{ "label": "仅角色视图", "value": "characterOnly" }, { "label": "角色+动作参考", "value": "dualReference" }], "description": "双参考：角色视图约束身份，动作参考图约束姿态与节奏。" },
+      { "id": "referenceStrength", "label": "参考强度", "type": "number", "widget": "slider", "defaultValue": 0.7, "display": "inline", "min": 0, "max": 1, "description": "双参考模式下 img2img 对动作参考图的依赖强度（仅 Qwen 生效）。" },
+      { "id": "actionIds", "label": "动作类型", "type": "text", "widget": "multiSelect", "display": "inline", "defaultValue": "idle", "description": "可多选要生成的动作；为空时默认生成待机。", "options": [{ "label": "待机", "value": "idle" }, { "label": "行走", "value": "walk" }, { "label": "攻击", "value": "attack" }, { "label": "受击", "value": "hurt" }, { "label": "死亡", "value": "death" }, { "label": "施法", "value": "cast" }] },
+      { "id": "frameCount", "label": "帧数", "type": "number", "widget": "slider", "defaultValue": 8, "display": "inline", "min": 1, "max": 32 },
+      { "id": "previewFps", "label": "预览帧率", "type": "number", "widget": "slider", "defaultValue": 12, "display": "inline", "min": 1, "max": 60 },
+      { "id": "loopMode", "label": "循环方式", "type": "select", "defaultValue": "auto", "options": [{ "label": "自动(攻击/死亡单次)", "value": "auto" }, { "label": "循环", "value": "loop" }, { "label": "单次", "value": "once" }] },
+      { "id": "allViews", "label": "全部视图", "type": "boolean", "display": "inline", "defaultValue": true, "description": "开启后为每个已有方向视图生成独立帧序列。" }
+    ]
+  },
+  {
+    "id": "output.godotSpriteFrames",
+    "label": "Godot SpriteFrames",
+    "category": "output",
+    "color": "output",
+    "layer": "asset",
+    "description": "导出 Godot SpriteFrames 初版 .tres 资源。",
+    "helpText": "输入 frames asset；输出 exports/workflows/godot/*.tres。",
+    "status": "available",
+    "inputs": [{ "id": "frames", "kind": "asset", "label": "帧列表" }],
+    "outputs": [{ "id": "asset", "kind": "asset", "label": "Godot 资源" }],
+    "params": [
+      { "id": "fileName", "label": "文件名", "type": "text", "defaultValue": "sprite_frames" },
+      { "id": "animationName", "label": "动画名", "type": "text", "defaultValue": "idle" },
+      { "id": "fps", "label": "帧率", "type": "number", "defaultValue": 8, "min": 1, "max": 60 }
+    ]
+  }
+]

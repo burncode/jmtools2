@@ -1,0 +1,28 @@
+{
+  "id": "low_poly_flat",
+  "label": "低模平光",
+  "params": {
+    "styleType": "stylized",
+    "colorTheme": "dark",
+    "renderType": "low_poly",
+    "pixelDensity": "none",
+    "edgeStyle": "hard",
+    "detail": 0.45,
+    "contrast": 0.75,
+    "saturation": 0.55,
+    "sharpness": 0.5,
+    "paletteMode": "preset",
+    "maxColors": 12,
+    "paletteStrength": 0.9,
+    "dithering": false,
+    "paletteColors": "[\"#22223b\",\"#4a4e69\",\"#9a8c98\",\"#c9ada7\",\"#f2e9e4\",\"#5f0f40\",\"#9a031e\",\"#fb8b24\"]",
+    "lightingType": "flat",
+    "shadowStrength": 0.35,
+    "highlightStrength": 0.25,
+    "ambient": 0.6,
+    "paletteLock": true,
+    "lineStyleLock": true,
+    "identityLock": false,
+    "consistencyStrength": 0.82
+  }
+}

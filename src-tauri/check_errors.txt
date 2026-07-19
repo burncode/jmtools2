@@ -1,0 +1,25 @@
+﻿cargo :     Checking jmtools v0.1.0 (D:\mydev\game\dev\gametools\jmtools\src-tauri)
+所在位置 C:\Users\mh_12\AppData\Local\Temp\ps-script-c2860abe-1846-4f5d-950e-a894e71d9a04.ps1:153 字符: 53
++ ... mydev\game\dev\gametools\jmtools\src-tauri"; cargo check 2>&1 | Out-F ...
++                                                  ~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (    Checking jm...ools\src-tauri):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+error: expected item after doc comment
+   --> src\character\prompt.rs:503:1
+    |
+502 | /// 鐢熸垚瑙嗗浘鍥惧儚锛屽彲閫夊湴浠ュ弬鑰冨浘锛堟瘝鐗堥€忔槑鍥撅級浣滀负鍥惧儚鏉′欢锛屼繚璇佸悓涓€瑙掕壊澶氭柟鍚戜竴鑷淬€?    | -----------------------------------------
+------------------------------------------- other attributes here
+503 | /// 鏃犲浘鐢熷浘鑳藉姏鐨?provider 浼氬洖閫€鍒扮函鏂囩敓鍥惧苟鍐?warning銆?    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ this doc comment doesn't document anything
+
+error: this file contains an unclosed delimiter
+   --> src\character\store.rs:438:2
+    |
+100 | fn attach_selected_master_image(
+    |                                - unclosed delimiter
+...
+438 |
+    | ^
+
+error: could not compile `jmtools` (lib) due to 2 previous errors

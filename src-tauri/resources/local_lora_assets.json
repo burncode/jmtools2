@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "bundles": [
+    {
+      "loraId": "pixel-art-sprite-klein",
+      "directory": "pixel-art-sprite-klein",
+      "fileName": "pytorch_lora_weights.safetensors",
+      "downloadUrl": "https://huggingface.co/Limbicnation/pixel-art-lora/resolve/main/pytorch_lora_weights.safetensors",
+      "hfRepo": "Limbicnation/pixel-art-lora",
+      "hfRevision": "main",
+      "estimatedSizeMb": 120
+    }
+  ]
+}

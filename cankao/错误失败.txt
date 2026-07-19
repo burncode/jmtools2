@@ -1,0 +1,105 @@
+sd-cli 生图失败（exit 1）。
+stdout:
+stable-diffusion.cpp:272  - loading diffusion model from 'C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\klein-4b-q4\flux-2-klein-4b-Q4_K_M.gguf'
+[INFO ] model.cpp:216  - load C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\klein-4b-q4\flux-2-klein-4b-Q4_K_M.gguf using gguf format
+[INFO ] stable-diffusion.cpp:319  - loading llm from 'C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\klein-4b-q4\Qwen3-4B-Q4_K_M.gguf'
+[INFO ] model.cpp:216  - load C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\klein-4b-q4\Qwen3-4B-Q4_K_M.gguf using gguf format
+[INFO ] stable-diffusion.cpp:333  - loading vae from 'C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\klein-4b-q4\flux2-vae.safetensors'
+[INFO ] model.cpp:219  - load C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\klein-4b-q4\flux2-vae.safetensors using safetensors format
+[INFO ] stable-diffusion.cpp:375  - Version: Flux.2 klein 
+[INFO ] stable-diffusion.cpp:403  - Weight type stat:                      f32: 453  |    q4_K: 266  |    q5_K: 30   |    q6_K: 37   |    bf16: 9    
+[INFO ] stable-diffusion.cpp:404  - Conditioner weight type stat:          f32: 145  |    q4_K: 216  |    q6_K: 37   
+[INFO ] stable-diffusion.cpp:405  - Diffusion model weight type stat:      f32: 60   |    q4_K: 50   |    q5_K: 30   |    bf16: 9    
+[INFO ] stable-diffusion.cpp:406  - VAE weight type stat:                  f32: 248  
+[INFO ] flux.hpp:1299 - flux: depth = 5, depth_single_blocks = 20, guidance_embed = false, context_in_dim = 7680, hidden_size = 3072, num_heads = 24
+[INFO ] stable-diffusion.cpp:797  - using VAE for encoding / decoding
+[INFO ] auto_encoder_kl.hpp:525  - vae decoder: ch = 128
+[INFO ] stable-diffusion.cpp:899  - Using flash attention in the diffusion model
+[INFO ] model.cpp:811  - NOT using mmap for 'C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\klein-4b-q4\flux-2-klein-4b-Q4_K_M.gguf' (mmap disabled by caller)
+[INFO ] model.cpp:811  - NOT using mmap for 'C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\klein-4b-q4\Qwen3-4B-Q4_K_M.gguf' (mmap disabled by caller)
+[INFO ] model.cpp:811  - NOT using mmap for 'C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\klein-4b-q4\flux2-vae.safetensors' (mmap disabled by caller)
+[INFO ] model.cpp:822  - model files processing completed in 0.00s
+[INFO ] 
+  |=>                                                | 27/795 - 1.12GB/s[K
+  |==>                                               | 45/795 - 1.04GB/s[K
+  |===>                                              | 60/795 - 1.00GB/s[K
+  |====>                                             | 66/795 - 912.71MB/s[K
+  |====>                                             | 75/795 - 1008.43MB/s[K
+  |=====>                                            | 87/795 - 1.01GB/s[K
+  |======>                                           | 99/795 - 1008.33MB/s[K
+  |======>                                           | 107/795 - 971.64MB/s[K
+  |=======>                                          | 118/795 - 958.72MB/s[K
+  |=======>                                          | 126/795 - 907.07MB/s[K
+  |========>                                         | 135/795 - 883.28MB/s[K
+  |=========>                                        | 148/795 - 901.94MB/s[K
+  |=========>                                        | 149/795 - 902.49MB/s[K
+
+  |=========>                                        | 149/795 - 902.49MB/s[K
+  |============>                                     | 195/795 - 905.50MB/s[K
+  |=============>                                    | 222/795 - 886.66MB/s[K
+  |==============>                                   | 237/795 - 856.44MB/s[K
+  |================>                                 | 259/795 - 835.32MB/s[K
+  |=================>                                | 276/795 - 813.91MB/s[K
+  |====================>                             | 321/795 - 822.11MB/s[K
+  |=====================>                            | 346/795 - 807.27MB/s[K
+  |=======================>                          | 368/795 - 797.00MB/s[K
+  |========================>                         | 391/795 - 789.42MB/s[K
+  |=========================>                        | 409/795 - 770.97MB/s[K
+  |===========================>                      | 430/795 - 759.89MB/s[K
+  |=============================>                    | 463/795 - 764.31MB/s[K
+  |==============================>                   | 489/795 - 755.22MB/s[K
+  |================================>                 | 511/795 - 796.73MB/s[K
+  |=================================>                | 533/795 - 786.83MB/s[K
+  |==================================>               | 545/795 - 774.11MB/s[K
+  |==================================>               | 547/795 - 759.31MB/s[K
+
+  |==================================>               | 547/795 - 759.31MB/s[K
+  |========================================>         | 643/795 - 757.07MB/s[K
+  |==================================================| 795/795 - 740.41MB/s[K
+model.cpp:1155 - loading tensors completed, taking 6.82s (read: 5.97s, memcpy: 0.00s, convert: 0.38s, copy_to_backend: 0.00s)
+[INFO ] stable-diffusion.cpp:1106 - total params memory size = 6135.75MB (VRAM 0.00MB, RAM 6135.75MB): text_encoders 3555.38MB(RAM), diffusion_model 2483.65MB(RAM), vae 96.72MB(RAM), controlnet 0.00MB(N/A), pmid 0.00MB(N/A)
+[INFO ] stable-diffusion.cpp:1201 - running in Flux2 FLOW mode
+[INFO ] stable-diffusion.cpp:4264 - generate_image 2016x2016
+[INFO ] stable-diffusion.cpp:1348 - apply lora at runtime
+[INFO ] model.cpp:219  - load C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\loras\pixel-art-sprite-klein\pytorch_lora_weights.safetensors using safetensors format
+[INFO ] lora.hpp:41   - loading LoRA from 'C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\loras\pixel-art-sprite-klein\pytorch_lora_weights.safetensors'
+[INFO ] model.cpp:811  - NOT using mmap for 'C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\loras\pixel-art-sprite-klein\pytorch_lora_weights.safetensors' (mmap disabled by caller)
+[INFO ] model.cpp:822  - model files processing completed in 0.00s
+[INFO ] 
+  |==================================================| 172/172 - 0.00MB/s[K
+model.cpp:1155 - loading tensors completed, taking 0.20s (read: 0.00s, memcpy: 0.00s, convert: 0.00s, copy_to_backend: 0.00s)
+[INFO ] model.cpp:219  - load C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\loras\pixel-art-sprite-klein\pytorch_lora_weights.safetensors using safetensors format
+[INFO ] lora.hpp:41   - loading LoRA from 'C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\loras\pixel-art-sprite-klein\pytorch_lora_weights.safetensors'
+[INFO ] model.cpp:811  - NOT using mmap for 'C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\loras\pixel-art-sprite-klein\pytorch_lora_weights.safetensors' (mmap disabled by caller)
+[INFO ] model.cpp:822  - model files processing completed in 0.00s
+[INFO ] 
+  |==================================================| 172/172 - 0.00MB/s[K
+model.cpp:1155 - loading tensors completed, taking 0.20s (read: 0.00s, memcpy: 0.00s, convert: 0.00s, copy_to_backend: 0.00s)
+[INFO ] 
+  |============>                                     | 44/172 - 613.96MB/s[K
+  |==================================================| 172/172 - 771.61MB/s[K
+model.cpp:1155 - loading tensors completed, taking 0.40s (read: 0.15s, memcpy: 0.00s, convert: 0.00s, copy_to_backend: 0.21s)
+[INFO ] model.cpp:219  - load C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\loras\pixel-art-sprite-klein\pytorch_lora_weights.safetensors using safetensors format
+[INFO ] lora.hpp:41   - loading LoRA from 'C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\loras\pixel-art-sprite-klein\pytorch_lora_weights.safetensors'
+[INFO ] model.cpp:811  - NOT using mmap for 'C:\Users\mh_12\AppData\Roaming\com.jmdev.jmtools\models\loras\pixel-art-sprite-klein\pytorch_lora_weights.safetensors' (mmap disabled by caller)
+[INFO ] model.cpp:822  - model files processing completed in 0.00s
+[INFO ] 
+  |==================================================| 172/172 - 0.00MB/s[K
+model.cpp:1155 - loading tensors completed, taking 0.20s (read: 0.00s, memcpy: 0.00s, convert: 0.00s, copy_to_backend: 0.00s)
+[INFO ] stable-diffusion.cpp:1501 - apply_loras completed, taking 1.04s
+[INFO ] denoiser.hpp:581  - get_sigmas with discrete scheduler
+[INFO ] stable-diffusion.cpp:3352 - sampling using Euler method
+[INFO ] ggml_extend.hpp:2170 - qwen3 offload params (3555.38 MB, 398 tensors) to runtime backend (Vulkan0), taking 3.17s
+[INFO ] stable-diffusion.cpp:4018 - get_learned_condition completed, taking 5.08s
+[INFO ] stable-diffusion.cpp:4298 - generating image: 1/1 - seed 42
+[INFO ] 
+stderr:
+ggml_vulkan: Device memory allocation of size 1816031232 failed.
+ggml_vulkan: vk::Device::allocateMemory: ErrorOutOfDeviceMemory
+[ERROR] ggml_extend.hpp:69   - ggml_gallocr_reserve_n_impl: failed to allocate Vulkan0 buffer of size 7567601056
+[ERROR] ggml_extend.hpp:1920 - flux: failed to allocate the compute buffer
+[ERROR] ggml_extend.hpp:2828 - flux alloc compute buffer failed
+[ERROR] stable-diffusion.cpp:2056 - diffusion model compute failed
+[ERROR] stable-diffusion.cpp:2149 - Diffusion model sampling failed
+[ERROR] stable-diffusion.cpp:4340 - sampling for image 1/1 failed after 6.99s
+[ERROR] main.cpp:792  - generate failed

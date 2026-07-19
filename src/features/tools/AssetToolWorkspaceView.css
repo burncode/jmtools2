@@ -1,0 +1,382 @@
+.asset-tool-workspace {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--app-panel-gap);
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.asset-tool-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 0;
+  border: 1px solid var(--app-glass-border);
+  border-radius: var(--app-radius-lg);
+  background: var(--app-glass-bg);
+  box-shadow: var(--app-shadow-sm);
+  backdrop-filter: blur(10px);
+  padding: var(--app-space-3) var(--app-space-4);
+}
+
+.asset-tool-page-header h2 {
+  margin: 0;
+  color: var(--app-text);
+  font-size: var(--app-font-size-2xl);
+  line-height: 1.2;
+}
+
+.asset-tool-page-header span {
+  display: block;
+  margin-top: 4px;
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-sm);
+}
+
+.asset-tool-layout {
+  --app-workbench-inspector-width: 320px;
+  --app-workbench-aside-width: 300px;
+
+  height: 100%;
+  min-height: 0;
+}
+
+.asset-tool-layout > .app-workbench-inspector,
+.asset-tool-layout > .app-workbench-main,
+.asset-tool-layout > .app-workbench-aside,
+.asset-tool-layout > .app-workbench-inspector > .app-inspector-panel,
+.asset-tool-layout > .app-workbench-main > .app-canvas-panel,
+.asset-tool-layout > .app-workbench-aside > .app-inspector-panel {
+  height: 100%;
+  min-height: 0;
+}
+
+.asset-tool-source-path,
+.asset-tool-muted,
+.asset-tool-output-path {
+  margin: 0;
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.asset-tool-run-button {
+  width: 100%;
+}
+
+.asset-tool-inspector-footer {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+.asset-tool-inspector-footer span {
+  color: var(--app-text-subtle);
+  font-size: var(--app-font-size-xs);
+  line-height: 1.4;
+  text-align: center;
+}
+
+.asset-tool-check-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--app-control-height);
+  border: 1px solid var(--app-control-border);
+  border-radius: var(--app-radius);
+  background: var(--app-control-bg);
+  color: var(--app-text);
+  font-size: var(--app-font-size-sm);
+  font-weight: 700;
+  padding: 8px 10px;
+}
+
+.asset-tool-color-adder {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 36px;
+  gap: 8px;
+}
+
+.asset-tool-color-adder input[type="color"] {
+  min-height: var(--app-control-height);
+  padding: 3px;
+}
+
+.asset-tool-sample-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 26px;
+}
+
+.asset-tool-sample-list > span {
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+}
+
+.asset-tool-sample-list button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--app-control-border);
+  border-radius: var(--app-radius-sm);
+  background: var(--app-control-bg);
+  color: var(--app-text);
+  cursor: pointer;
+  font-size: var(--app-font-size-xs);
+  padding: 4px 6px;
+}
+
+.asset-tool-sample-list i {
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--app-border-strong);
+  border-radius: 999px;
+}
+
+.asset-tool-sample-list svg {
+  width: 12px;
+  height: 12px;
+  color: var(--app-text-muted);
+}
+
+.asset-tool-preview-shell {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+
+.asset-tool-canvas-panel,
+.asset-tool-canvas-panel .app-canvas-panel-body {
+  min-height: 0;
+}
+
+.asset-tool-canvas-panel .app-canvas-panel-toolbar {
+  grid-template-columns: minmax(120px, 1fr) auto auto;
+  gap: 10px;
+}
+
+.asset-tool-canvas-panel .app-canvas-panel-controls,
+.asset-tool-canvas-panel .app-canvas-panel-actions {
+  min-width: 0;
+}
+
+.asset-tool-canvas-actions {
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
+.asset-tool-toolbar-segment {
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(58px, max-content);
+  width: max-content;
+}
+
+.asset-tool-toolbar-segment .app-segmented-item {
+  min-height: var(--app-control-height-sm);
+  padding: 5px 9px;
+}
+
+.asset-tool-preview-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--app-panel-border);
+  border-radius: var(--app-radius);
+  background: var(--app-panel-bg-muted);
+}
+
+.asset-tool-preview-stage[data-background="checkerboard"] {
+  background-color: var(--app-panel-bg-muted);
+  background-image:
+    linear-gradient(45deg, color-mix(in srgb, var(--app-border) 34%, transparent) 25%, transparent 25%),
+    linear-gradient(-45deg, color-mix(in srgb, var(--app-border) 34%, transparent) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, color-mix(in srgb, var(--app-border) 34%, transparent) 75%),
+    linear-gradient(-45deg, transparent 75%, color-mix(in srgb, var(--app-border) 34%, transparent) 75%);
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+  background-size: 20px 20px;
+}
+
+.asset-tool-preview-stage[data-background="dark"] {
+  background: #111827;
+}
+
+.asset-tool-preview-stage[data-background="light"] {
+  background: #f8fafc;
+}
+
+.asset-tool-compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  width: min(100%, 920px);
+  height: 100%;
+  padding: 14px;
+}
+
+.asset-tool-preview-frame {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 10px;
+  min-width: 0;
+  min-height: 360px;
+  margin: 0;
+  border: 1px solid var(--app-control-border);
+  border-radius: var(--app-radius);
+  background: color-mix(in srgb, var(--app-panel-bg) 34%, transparent);
+  padding: 10px;
+}
+
+.asset-tool-preview-frame figcaption {
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+  font-weight: 760;
+}
+
+.asset-tool-preview-frame img {
+  align-self: center;
+  justify-self: center;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.asset-tool-preview-frame span,
+.asset-tool-preview-empty-note {
+  align-self: center;
+  justify-self: center;
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-sm);
+}
+
+.asset-tool-preview-stage[data-mode="source"] .asset-tool-preview-frame,
+.asset-tool-preview-stage[data-mode="result"] .asset-tool-preview-frame {
+  width: min(100%, 720px);
+  height: min(100%, 520px);
+  min-height: 360px;
+}
+
+.asset-tool-preview-empty.app-empty-state {
+  min-height: 150px;
+  max-width: 360px;
+  padding: 18px;
+}
+
+.asset-tool-status-banner.app-status-banner {
+  gap: 8px;
+  padding: 10px;
+}
+
+.asset-tool-status-banner .app-status-banner-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.asset-tool-status-banner .app-status-banner-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.asset-tool-status-banner .app-status-banner-copy strong {
+  font-size: var(--app-font-size-sm);
+}
+
+.asset-tool-status-banner .app-status-banner-copy p {
+  font-size: var(--app-font-size-xs);
+  line-height: 1.5;
+}
+
+.asset-tool-result-meta {
+  display: grid;
+  gap: 8px;
+}
+
+.asset-tool-result-meta div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 34px;
+  border: 1px solid var(--app-control-border);
+  border-radius: var(--app-radius-sm);
+  background: var(--app-control-bg);
+  padding: 6px 8px;
+}
+
+.asset-tool-result-meta span {
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+}
+
+.asset-tool-result-meta strong {
+  color: var(--app-text);
+  font-size: var(--app-font-size-sm);
+}
+
+.asset-tool-warning-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--app-text-muted);
+  font-size: var(--app-font-size-xs);
+  line-height: 1.5;
+}
+
+@media (max-width: 1320px) {
+  .asset-tool-layout {
+    --app-workbench-inspector-width: 300px;
+    --app-workbench-aside-width: 280px;
+  }
+
+  .asset-tool-canvas-panel .app-canvas-panel-toolbar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .asset-tool-canvas-panel .app-canvas-panel-controls,
+  .asset-tool-canvas-panel .app-canvas-panel-actions,
+  .asset-tool-canvas-actions {
+    justify-content: flex-start;
+  }
+
+  .asset-tool-compare-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1120px) {
+  .asset-tool-workspace,
+  .asset-tool-layout {
+    height: auto;
+  }
+
+  .asset-tool-layout > .app-workbench-inspector,
+  .asset-tool-layout > .app-workbench-main,
+  .asset-tool-layout > .app-workbench-aside,
+  .asset-tool-layout > .app-workbench-inspector > .app-inspector-panel,
+  .asset-tool-layout > .app-workbench-main > .app-canvas-panel,
+  .asset-tool-layout > .app-workbench-aside > .app-inspector-panel {
+    height: auto;
+  }
+
+  .asset-tool-toolbar-segment {
+    width: 100%;
+  }
+
+  .asset-tool-canvas-actions,
+  .asset-tool-toolbar-segment {
+    min-width: 0;
+  }
+}

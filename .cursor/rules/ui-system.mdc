@@ -1,0 +1,45 @@
+---
+description: JMTools UI 系统、tokens 与桌面感规范
+globs: src/**/*.tsx,src/**/*.css,src/styles/**
+alwaysApply: false
+---
+
+# UI 系统规则
+
+## 分层
+
+- 业务页用 `src/components/shared`；`src/components/ui` **只消费不修改**
+- 新 shadcn 基元：CLI 生成到 `components/ui`，业务变体在 `shared`
+
+## Token 与样式
+
+- 颜色/间距/字号/字重优先 `src/styles/tokens.css` 的 `--app-*`
+- 禁止功能页随意写裸 `px/rem` 破坏 8px rhythm
+- light/dark 同时维护；密度用 `data-density="compact|comfortable|spacious"`
+
+## 桌面感
+
+- 紧凑工具栏、Inspector、分栏、可滚动工作区
+- 禁止 landing-page 式大卡片、hero、装饰性大间距
+- 8px 圆角默认；避免嵌套 Card
+- 最小窗口尺寸下文字不重叠、不横向溢出
+
+## 文案与图标
+
+- 按钮、标签、错误、空状态：**简体中文**，简洁桌面软件用语
+- 结构操作用 `lucide-react`；禁止 emoji 作导航/工具栏图标
+
+## 密度与控件
+
+- 工作台/Inspector 优先 `data-density="compact"`、`size="sm"`
+
+## Typography 角色
+
+| 用途 | CSS 类 |
+|------|--------|
+| 页面标题 | `workflow-type-page-title` |
+| 区块标题 | `workflow-type-section` |
+| 说明/副文案 | `workflow-type-caption` |
+| 字段标签/错误 | 对应 field 类，不混用过大的字号 |
+
+详见 `docs/ui-system.md`。

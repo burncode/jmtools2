@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "bundles": [
+    {
+      "profileId": "klein-4b-q4",
+      "directory": "klein-4b-q4",
+      "cliArgs": {
+        "offloadToCpu": true,
+        "diffusionFa": true
+      },
+      "files": [
+        {
+          "role": "diffusion",
+          "fileName": "flux-2-klein-4b-Q4_K_M.gguf",
+          "downloadUrl": "https://huggingface.co/unsloth/FLUX.2-klein-4B-GGUF/resolve/main/flux-2-klein-4b-Q4_K_M.gguf",
+          "hfRepo": "unsloth/FLUX.2-klein-4B-GGUF",
+          "hfRevision": "main",
+          "estimatedSizeMb": 2800
+        },
+        {
+          "role": "vae",
+          "fileName": "flux2-vae.safetensors",
+          "downloadUrl": "https://huggingface.co/Comfy-Org/flux2-dev/resolve/main/split_files/vae/flux2-vae.safetensors",
+          "hfRepo": "Comfy-Org/flux2-dev",
+          "hfRevision": "main",
+          "estimatedSizeMb": 320
+        },
+        {
+          "role": "llm",
+          "fileName": "Qwen3-4B-Q4_K_M.gguf",
+          "downloadUrl": "https://huggingface.co/unsloth/Qwen3-4B-GGUF/resolve/main/Qwen3-4B-Q4_K_M.gguf",
+          "hfRepo": "unsloth/Qwen3-4B-GGUF",
+          "hfRevision": "main",
+          "estimatedSizeMb": 2500
+        }
+      ]
+    },
+    {
+      "profileId": "klein-4b-q8",
+      "directory": "klein-4b-q8",
+      "cliArgs": {
+        "offloadToCpu": true,
+        "diffusionFa": true
+      },
+      "files": [
+        {
+          "role": "diffusion",
+          "fileName": "flux-2-klein-4b-Q8_0.gguf",
+          "downloadUrl": "https://huggingface.co/unsloth/FLUX.2-klein-4B-GGUF/resolve/main/flux-2-klein-4b-Q8_0.gguf",
+          "hfRepo": "unsloth/FLUX.2-klein-4B-GGUF",
+          "hfRevision": "main",
+          "estimatedSizeMb": 4200
+        },
+        {
+          "role": "vae",
+          "fileName": "flux2-vae.safetensors",
+          "downloadUrl": "https://huggingface.co/Comfy-Org/flux2-dev/resolve/main/split_files/vae/flux2-vae.safetensors",
+          "hfRepo": "Comfy-Org/flux2-dev",
+          "hfRevision": "main",
+          "estimatedSizeMb": 320
+        },
+        {
+          "role": "llm",
+          "fileName": "Qwen3-4B-Q4_K_M.gguf",
+          "downloadUrl": "https://huggingface.co/unsloth/Qwen3-4B-GGUF/resolve/main/Qwen3-4B-Q4_K_M.gguf",
+          "hfRepo": "unsloth/Qwen3-4B-GGUF",
+          "hfRevision": "main",
+          "estimatedSizeMb": 2500
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+[package]
+name = "jmtools"
+version = "0.1.0"
+description = "A Tauri App"
+authors = ["you"]
+edition = "2021"
+default-run = "jmtools"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "jm_ppvalidate"
+path = "src/bin/jm_ppvalidate.rs"
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "jmtools_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["protocol-asset"] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri-plugin-dialog = "2"
+tauri-plugin-mcp-bridge = "0.11.2"
+rusqlite = { version = "0.32", features = ["bundled"] }
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+tracing = "0.1"
+tracing-appender = "0.2"
+tracing-log = "0.2"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt", "json"] }
+base64 = "0.22"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png", "webp", "gif"] }
+color_quant = "1"
+sha2 = "0.10"
+sysinfo = "0.33"
+zip = "2"
+diffusion-rs = { version = "0.1.20", optional = true, features = ["vulkan"] }
+hf-hub = { version = "0.4", default-features = false, features = ["ureq"] }
+
+[features]
+default = []
+local-diffusion = ["dep:diffusion-rs"]
+local-diffusion-vulkan = ["local-diffusion"]

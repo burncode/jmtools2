@@ -1,0 +1,36 @@
+---
+description: JMTools 通用架构分层与跨层原则
+alwaysApply: true
+---
+
+# 架构边界
+
+## 目录职责
+
+| 目录 | 职责 | 禁止 |
+|------|------|------|
+| `src/features/*` | 业务模块、页面组合、feature-local hooks | 堆全局工具；改 `components/ui` |
+| `src/components/shared` | 可复用应用级 UI 组合 | 写业务域逻辑 |
+| `src/components/ui` | shadcn 生成基元 | **禁止手改**；变体在 shared 包一层 |
+| `src/lib/tauri` | Tauri command 前端封装 | 组件内直接 `invoke` |
+| `src/stores` | 跨 feature 全局 store | 把 feature 细节泄漏到 `App.tsx` |
+| `src-tauri/src/commands` | Rust 命令薄入口（单文件 ≤600 行） | 跳过路径/manifest 校验；堆域逻辑 |
+| `src-tauri/src/character` | 角色域：model/store/prompt/generation/actions | 直接暴露 Tauri command |
+
+## 跨层原则
+
+- **本地优先**：核心项目访问不依赖云服务
+- **数据分离**：应用数据 vs 项目数据（`jmproject.json` + 工作流 manifest）；manifest 不存大体积生成物
+- **扩展方式**：新功能优先扩展现有 feature，禁止把 `App.tsx` 当永久垃圾场
+- **包管理**：Bun（`bun install` / `bun run build` / `bun run tauri`）
+- **验证**：前端改动 `bun run build`；Rust 改动 `cargo check`（在 `src-tauri`）
+- **深链文档**：架构细节见 `docs/`，不在对话中复制长文档
+
+## 数据流（简图）
+
+```
+features → shared / lib/tauri / stores
+lib/tauri → src-tauri/commands → engine
+```
+
+详见 `docs/workflow-engine-architecture.md`、`docs/data-architecture-notes.md`。
